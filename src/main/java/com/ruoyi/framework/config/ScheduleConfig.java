@@ -2,6 +2,7 @@ package com.ruoyi.framework.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 import javax.sql.DataSource;
 import java.util.Properties;
@@ -16,6 +17,7 @@ import java.util.Properties;
 public class ScheduleConfig
 {
     @Bean
+    @Primary
     public SchedulerFactoryBean schedulerFactoryBean(DataSource dataSource)
     {
         SchedulerFactoryBean factory = new SchedulerFactoryBean();
