@@ -1,0 +1,109 @@
+<!DOCTYPE HTML>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+    <div class="container-div">
+		<div class="row">
+			<div class="col-sm-12 search-collapse">
+				<form id="notice-form">
+					<div class="select-list">
+						<ul>
+							<li>
+								介绍标题：<input type="text" name="title"/>
+							</li>
+							<li>
+								场馆介绍类型：
+								<select name="introduceType" th:with="type=${@dict.getType('sys_introduce_type')}">
+									<option value=0>所有</option>
+									<option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+								</select>
+							</li>
+							<li>
+								<a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
+								<a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
+							</li>
+						</ul>
+					</div>
+				</form>
+			</div>
+			
+	        <div class="btn-group-sm hidden-xs" id="toolbar" role="group">
+		        <a class="btn btn-success" onclick="$.operate.addFull()">
+		            <i class="fa fa-thumbs-o-up"></i> 审核通过
+		        </a>
+		        <a class="btn btn-primary btn-edit disabled" onclick="$.operate.editFull()">
+		            <i class="fa fa-user-times"></i> 审核不通过
+		        </a>
+		        <a class="btn btn-danger btn-del disabled" onclick="$.operate.removeAll()">
+		            <i class="fa fa-wrench"></i> 更改时间
+		        </a>
+	        </div>
+	        
+	        <div class="col-sm-12 select-table table-striped">
+	            <table id="bootstrap-table" data-mobile-responsive="true"></table>
+	        </div>
+    	</div>
+    </div>
+    <div th:include="include :: footer"></div>
+    <script th:inline="javascript">
+        var editFlag = [[${@permission.hasPermi('system:notice:edit')}]];
+        var removeFlag = [[${@permission.hasPermi('system:notice:remove')}]];
+        var types = [[${@dict.getType('sys_introduce_type')}]];
+        var prefix = ctx + "venue/introduce";
+
+        $(function() {
+            var options = {
+                url: prefix + "/list",
+                createUrl: prefix + "/add",
+                updateUrl: prefix + "/edit/{id}",
+                removeUrl: prefix + "/remove",
+                modalName: "预约审核",
+                search: false,
+                columns: [{
+		            checkbox: true
+		        },
+				{
+					field : 'name', 
+					title : '姓名' 
+				},
+				{
+					field : 'telephone', 
+					title : '手机号' 
+				},
+				{
+		            field: 'w_no',
+		            title: '微信名'
+		        },
+				{
+		            field: 'adult',
+		            title: '成人人数'
+		        },
+				{
+		            field: 'child',
+		            title: '儿童人数'
+		        },
+				{
+		            field: 'subscribe_typeName',
+		            title: '预约类型'
+		        }
+		        ,
+				{
+		            field: 'subscribe_time',
+		            title: '预约时间'
+		        },
+				{
+		            field: 'venueName',
+		            title: '预约场馆'
+		        },
+				{
+		            field: 'remark',
+		            title: '备注'
+		        }
+		       ]
+            };
+            $.table.init(options);
+        });
+    </script>
+</body>
+</html>
