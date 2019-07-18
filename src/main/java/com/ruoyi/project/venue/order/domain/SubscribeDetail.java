@@ -2,7 +2,13 @@ package com.ruoyi.project.venue.order.domain;
 
 import java.util.Date;
 
-public class SubscribeDetail {
+import com.ruoyi.framework.web.domain.BaseEntity;
+
+public class SubscribeDetail extends BaseEntity{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	// ID 
 	private int id;
 	// 周几 

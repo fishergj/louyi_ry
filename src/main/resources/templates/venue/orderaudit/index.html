@@ -1,7 +1,9 @@
 <!DOCTYPE HTML>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <meta charset="utf-8">
-<head th:include="include :: header"></head>
+<head>
+	<th:block th:include="include :: header('预约审核列表')" />
+</head>
 <body class="gray-bg">
     <div class="container-div">
 		<div class="row">
@@ -10,15 +12,31 @@
 					<div class="select-list">
 						<ul>
 							<li>
-								介绍标题：<input type="text" name="title"/>
+								手机号码：<input type="text" name="telephone"/>
 							</li>
 							<li>
-								场馆介绍类型：
-								<select name="introduceType" th:with="type=${@dict.getType('sys_introduce_type')}">
+								预约人姓名：<input type="text" name="name"/>
+							</li>
+
+							<li>
+								预约类型：
+								<select name="subscribe_type" th:with="type=${@dict.getType('sys_order_type')}">
 									<option value=0>所有</option>
 									<option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
 								</select>
 							</li>
+							<li>
+								预约状态：
+								<select name="status" th:with="type=${@dict.getType('sys_order_status')}">
+									<option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+								</select>
+							</li>
+							<li class="select-time">
+									<label>预约时间： </label>
+									<input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginTime]"/>
+									<span>-</span>
+									<input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endTime]"/>
+								</li>
 							<li>
 								<a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
 								<a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
@@ -28,14 +46,14 @@
 				</form>
 			</div>
 			
-	        <div class="btn-group-sm hidden-xs" id="toolbar" role="group">
-		        <a class="btn btn-success" onclick="$.operate.addFull()">
-		            <i class="fa fa-thumbs-o-up"></i> 审核通过
+	        <div class="btn-group-sm" id="toolbar" role="group">
+		        <a class="btn btn-success" onclick="$.operate.addFull()" shiro:hasPermission="system:notice:add">
+		            <i class="fa fa-thumbs-o-up"></i> 通过
 		        </a>
-		        <a class="btn btn-primary btn-edit disabled" onclick="$.operate.editFull()">
-		            <i class="fa fa-user-times"></i> 审核不通过
+		        <a class="btn btn-primary single disabled" onclick="$.operate.editFull()" shiro:hasPermission="system:notice:edit">
+		            <i class="fa fa-user-times"></i> 驳回
 		        </a>
-		        <a class="btn btn-danger btn-del disabled" onclick="$.operate.removeAll()">
+		        <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="system:notice:remove">
 		            <i class="fa fa-wrench"></i> 更改时间
 		        </a>
 	        </div>
@@ -49,9 +67,10 @@
     <script th:inline="javascript">
         var editFlag = [[${@permission.hasPermi('system:notice:edit')}]];
         var removeFlag = [[${@permission.hasPermi('system:notice:remove')}]];
-        var types = [[${@dict.getType('sys_introduce_type')}]];
-        var prefix = ctx + "venue/introduce";
-
+        var types = [[${@dict.getType('sys_order_type')}]];
+        var statues = [[${@dict.getType('sys_order_status')}]];
+        var prefix = ctx + "venue/orderaudit";
+  			
         $(function() {
             var options = {
                 url: prefix + "/list",
@@ -77,20 +96,34 @@
 		        },
 				{
 		            field: 'adult',
-		            title: '成人人数'
+		            title: '成人人数',
+		            sortable: true
 		        },
 				{
 		            field: 'child',
-		            title: '儿童人数'
+		            title: '儿童人数',
+		            sortable: true
 		        },
 				{
-		            field: 'subscribe_typeName',
-		            title: '预约类型'
+		            field: 'subscribe_type',
+		            title: '预约类型',
+		            align: 'center',
+		            formatter: function(value, row, index) {
+		            	return $.table.selectDictLabel(types, value);
+		            }
+		        },
+				{
+		            field: 'status',
+		            title: '预约状态',
+		            formatter: function(value, row, index) {
+		            	return $.table.selectDictLabel(statues, value);
+		            }
 		        }
 		        ,
 				{
-		            field: 'subscribe_time',
-		            title: '预约时间'
+		            field: 'input_time',
+		            title: '预约时间',
+		            sortable: true
 		        },
 				{
 		            field: 'venueName',

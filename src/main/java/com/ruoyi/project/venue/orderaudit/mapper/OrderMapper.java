@@ -1,24 +1,16 @@
 package com.ruoyi.project.venue.orderaudit.mapper;
 
-import java.util.HashMap;
 import java.util.List;
 
-import com.ruoyi.project.venue.order.domain.SubscribeDetail;
+import com.ruoyi.project.venue.orderaudit.domain.Order;
 
 
 public interface OrderMapper {
 	/**
-	 * 批量插入数据
+	 * 查询预约记录列表
 	 * @param list
 	 * @return
 	 */
-	public int  insertBatchDetails(List<SubscribeDetail> list);
-	
-	/**
-	 * 判断时间是否已经存在
-	 * @param map
-	 * @return
-	 */
-	int isOrderTimeExist(HashMap<String,Object> map);
+	public List<Order>  selectOrderList(Order bo);
 
 }

@@ -3,9 +3,14 @@ package com.ruoyi.project.venue.introduce.domain;
 import java.util.Date;
 
 import com.alibaba.fastjson.JSON;
+import com.ruoyi.framework.web.domain.BaseEntity;
 
-public class Venue {
+public class Venue extends BaseEntity{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int id;
 	// 场馆名称 
     private String name;

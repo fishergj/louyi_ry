@@ -7,21 +7,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.ruoyi.framework.aspectj.lang.annotation.Log;
-import com.ruoyi.framework.aspectj.lang.enums.BusinessType;
 import com.ruoyi.framework.web.controller.BaseController;
-import com.ruoyi.framework.web.domain.AjaxResult;
 import com.ruoyi.framework.web.page.TableDataInfo;
-import com.ruoyi.project.venue.introduce.domain.VenueIntro;
-import com.ruoyi.project.venue.introduce.service.IIntroduceService;
+import com.ruoyi.project.venue.orderaudit.domain.Order;
+import com.ruoyi.project.venue.orderaudit.service.IOrderAuditService;
 
 /**
- * 场馆介绍 信息操作处理
+ * 预约审核 信息操作处理
  * 
  * @author jungao
  * @date Dec 14, 2018 2:04:04 PM
@@ -32,75 +28,32 @@ public class OrderAuditController extends BaseController {
 	private String prefix = "venue/orderaudit";
 
 	@Autowired
-	private IIntroduceService introduceService;
+	private IOrderAuditService orderAuditService;
 
 	@RequiresPermissions("system:orderaudit:view")
 	@GetMapping()
-	public String venueIntro() {
+	public String orderAudit() {
 		return prefix + "/index";
 	}
 
 	/**
-	 * 查询场馆介绍列表
+	 * 查询预约审核列表
 	 */
 	@RequiresPermissions("system:orderaudit:list")
 	@PostMapping("/list")
 	@ResponseBody
-	public TableDataInfo list(VenueIntro venueIntro) {
+	public TableDataInfo list(Order order) {
 		startPage();
-		List<VenueIntro> list = introduceService.selectVenueIntroList(venueIntro);
+		List<Order> list = orderAuditService.selectOrderList(order);
 		return getDataTable(list);
 	}
 
 	/**
-	 * 新增场馆介绍
+	 * 新增预约审核
 	 */
 	@GetMapping("/add")
 	public String add(ModelMap mmap) {
-		mmap.put("venues", introduceService.selectAllVenues());
+		//mmap.put("venues", introduceService.selectAllVenues());
 		return prefix + "/add";
-	}
-
-	/**
-	 * 新增保存场馆介绍
-	 */
-	@RequiresPermissions("system:orderaudit:add")
-	@Log(title = "通知场馆介绍", businessType = BusinessType.INSERT)
-	@PostMapping("/add")
-	@ResponseBody
-	public AjaxResult addSave(VenueIntro venueIntro) {
-		return toAjax(introduceService.insertVenueIntro(venueIntro));
-	}
-
-	/**
-	 * 修改场馆介绍
-	 */
-	@GetMapping("/edit/{id}")
-	public String edit(@PathVariable("id") Long id, ModelMap mmap) {
-		mmap.put("venueIntro", introduceService.selectVenueIntroById(id));
-		mmap.put("venues", introduceService.selectAllVenues());
-		return prefix + "/edit";
-	}
-
-	/**
-	 * 修改保存场馆介绍
-	 */
-	@RequiresPermissions("system:orderaudit:edit")
-	@Log(title = "通知场馆介绍", businessType = BusinessType.UPDATE)
-	@PostMapping("/edit")
-	@ResponseBody
-	public AjaxResult editSave(VenueIntro venueIntro) {
-		return toAjax(introduceService.updateVenueIntro(venueIntro));
-	}
-
-	/**
-	 * 删除场馆介绍
-	 */
-	@RequiresPermissions("system:orderaudit:remove")
-	@Log(title = "通知场馆介绍", businessType = BusinessType.DELETE)
-	@PostMapping("/remove")
-	@ResponseBody
-	public AjaxResult remove(String ids) {
-		return toAjax(introduceService.deleteVenueIntroByIds(ids));
 	}
 }

@@ -3,6 +3,7 @@ package com.ruoyi.project.venue.introduce.domain;
 import java.util.Date;
 
 import com.alibaba.fastjson.JSON;
+import com.ruoyi.framework.web.domain.BaseEntity;
 
 /**
  * 场馆介绍 sys_notice
@@ -10,7 +11,11 @@ import com.alibaba.fastjson.JSON;
  * @author jungao
  * @date Dec 14, 2018 2:02:59 PM
  */
-public class VenueIntro {
+public class VenueIntro extends BaseEntity{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int id;
 	// 标题
 	private String title;

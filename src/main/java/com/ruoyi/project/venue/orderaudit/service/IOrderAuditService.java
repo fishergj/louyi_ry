@@ -1,10 +1,13 @@
 package com.ruoyi.project.venue.orderaudit.service;
 
+import java.util.List;
+
+import com.ruoyi.project.venue.orderaudit.domain.Order;
+
 public interface IOrderAuditService {
 	/**
-	 * 批量插入数据
-	 * @param list
-	 * @return
+	 * 查询预约列表
+	 * @param searchBo
 	 */
-	public void  insertBatchDetails();
+	public List<Order>  selectOrderList(Order order);
 }
