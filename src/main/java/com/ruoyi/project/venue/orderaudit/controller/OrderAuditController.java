@@ -11,8 +11,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ruoyi.framework.aspectj.lang.annotation.Log;
+import com.ruoyi.framework.aspectj.lang.enums.BusinessType;
 import com.ruoyi.framework.web.controller.BaseController;
+import com.ruoyi.framework.web.domain.AjaxResult;
 import com.ruoyi.framework.web.page.TableDataInfo;
+import com.ruoyi.project.venue.introduce.service.IIntroduceService;
 import com.ruoyi.project.venue.orderaudit.domain.Order;
 import com.ruoyi.project.venue.orderaudit.service.IOrderAuditService;
 
@@ -26,6 +30,8 @@ import com.ruoyi.project.venue.orderaudit.service.IOrderAuditService;
 @RequestMapping("/venue/orderaudit")
 public class OrderAuditController extends BaseController {
 	private String prefix = "venue/orderaudit";
+	@Autowired
+	private IIntroduceService introduceService;
 
 	@Autowired
 	private IOrderAuditService orderAuditService;
@@ -49,11 +55,24 @@ public class OrderAuditController extends BaseController {
 	}
 
 	/**
-	 * 新增预约审核
+	 * 通过预约信息
 	 */
-	@GetMapping("/add")
-	public String add(ModelMap mmap) {
-		//mmap.put("venues", introduceService.selectAllVenues());
-		return prefix + "/add";
+	@RequiresPermissions("system:orderaudit:pass")
+	@Log(title = "预约信息通过", businessType = BusinessType.DELETE)
+	@PostMapping("/pass")
+	@ResponseBody
+	public AjaxResult pass(String ids) {
+		return toAjax(introduceService.deleteVenueIntroByIds(ids));
+	}
+	
+	/**
+	 * 驳回预约信息
+	 */
+	@RequiresPermissions("system:orderaudit:reject")
+	@Log(title = "预约信息驳回", businessType = BusinessType.DELETE)
+	@PostMapping("/reject")
+	@ResponseBody
+	public AjaxResult reject(String ids) {
+		return toAjax(introduceService.deleteVenueIntroByIds(ids));
 	}
 }

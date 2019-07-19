@@ -47,13 +47,13 @@
 			</div>
 			
 	        <div class="btn-group-sm" id="toolbar" role="group">
-		        <a class="btn btn-success" onclick="$.operate.addFull()" shiro:hasPermission="system:notice:add">
+		        <a class="btn btn-success" onclick="$.operate.passAll()" shiro:hasPermission="system:orderaudit:pass">
 		            <i class="fa fa-thumbs-o-up"></i> 通过
 		        </a>
-		        <a class="btn btn-primary single disabled" onclick="$.operate.editFull()" shiro:hasPermission="system:notice:edit">
+		        <a class="btn btn-primary single disabled" onclick="$.operate.rejectAll()" shiro:hasPermission="system:orderaudit:reject">
 		            <i class="fa fa-user-times"></i> 驳回
 		        </a>
-		        <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="system:notice:remove">
+		        <a class="btn btn-danger multiple disabled" onclick="$.operate.editFull()" shiro:hasPermission="system:notice:remove">
 		            <i class="fa fa-wrench"></i> 更改时间
 		        </a>
 	        </div>
@@ -66,7 +66,6 @@
     <div th:include="include :: footer"></div>
     <script th:inline="javascript">
         var editFlag = [[${@permission.hasPermi('system:notice:edit')}]];
-        var removeFlag = [[${@permission.hasPermi('system:notice:remove')}]];
         var types = [[${@dict.getType('sys_order_type')}]];
         var statues = [[${@dict.getType('sys_order_status')}]];
         var prefix = ctx + "venue/orderaudit";
@@ -74,9 +73,9 @@
         $(function() {
             var options = {
                 url: prefix + "/list",
-                createUrl: prefix + "/add",
+                passUrl: prefix + "/pass",
                 updateUrl: prefix + "/edit/{id}",
-                removeUrl: prefix + "/remove",
+                rejectUrl: prefix + "/reject",
                 modalName: "预约审核",
                 search: false,
                 columns: [{
@@ -97,11 +96,13 @@
 				{
 		            field: 'adult',
 		            title: '成人人数',
+		            align: 'right',
 		            sortable: true
 		        },
 				{
 		            field: 'child',
 		            title: '儿童人数',
+		            align: 'right',
 		            sortable: true
 		        },
 				{
