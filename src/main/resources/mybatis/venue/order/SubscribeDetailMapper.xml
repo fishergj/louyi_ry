@@ -53,5 +53,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          from t_subscribe_detail
          where subscribeDate = #{subscribeDate,jdbcType=TIMESTAMP}
          and subscribeFromDt = #{subscribeFromDt,jdbcType=TIMESTAMP}
-    	</select>
+     </select>
+     
+     <select id="getInvalidDateList" parameterType="Date" resultType="SubscribeDetail">
+      <include refid="selectSubscribeDeatailVo"/>
+        where CONCAT(date_format(subscribeDate,'%Y-%m-%d'),' ', subscribeFromDt) > #{fromDt,jdbcType=TIMESTAMP}
+        order by subscribeDate,subscribeFromDt 
+     </select>
+     
+      <select id="selectFromDtById" parameterType="int" resultType="Date">
+         select STR_TO_DATE(CONCAT(date_format(subscribeDate,'%Y-%m-%d'),' ', subscribeFromDt), '%Y-%m-%d %H:%i:%s') as fromDt
+         from t_subscribe_detail
+         where id = #{id}
+      </select>
+     
 </mapper>

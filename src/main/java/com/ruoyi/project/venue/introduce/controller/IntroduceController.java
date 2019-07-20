@@ -36,7 +36,7 @@ public class IntroduceController extends BaseController {
 	@Autowired
 	private IIntroduceService introduceService;
 
-	@RequiresPermissions("system:introduce:view")
+	@RequiresPermissions("venue:introduce:view")
 	@GetMapping()
 	public String venueIntro() {
 		return prefix + "/index";
@@ -45,7 +45,7 @@ public class IntroduceController extends BaseController {
 	/**
 	 * 查询场馆介绍列表
 	 */
-	@RequiresPermissions("system:introduce:list")
+	@RequiresPermissions("venue:introduce:list")
 	@PostMapping("/list")
 	@ResponseBody
 	public TableDataInfo list(VenueIntro venueIntro) {
@@ -66,7 +66,7 @@ public class IntroduceController extends BaseController {
 	/**
 	 * 新增保存场馆介绍
 	 */
-	@RequiresPermissions("system:introduce:add")
+	@RequiresPermissions("venue:introduce:add")
 	@Log(title = "通知场馆介绍", businessType = BusinessType.INSERT)
 	@PostMapping("/add")
 	@ResponseBody
@@ -87,7 +87,7 @@ public class IntroduceController extends BaseController {
 	/**
 	 * 修改保存场馆介绍
 	 */
-	@RequiresPermissions("system:introduce:edit")
+	@RequiresPermissions("venue:introduce:edit")
 	@Log(title = "通知场馆介绍", businessType = BusinessType.UPDATE)
 	@PostMapping("/edit")
 	@ResponseBody
@@ -98,7 +98,7 @@ public class IntroduceController extends BaseController {
 	/**
 	 * 删除场馆介绍
 	 */
-	@RequiresPermissions("system:introduce:remove")
+	@RequiresPermissions("venue:introduce:remove")
 	@Log(title = "通知场馆介绍", businessType = BusinessType.DELETE)
 	@PostMapping("/remove")
 	@ResponseBody

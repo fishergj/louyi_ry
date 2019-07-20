@@ -19,6 +19,7 @@ import com.ruoyi.project.venue.introduce.domain.Venue;
 import com.ruoyi.project.venue.introduce.mapper.VenueMapper;
 import com.ruoyi.project.venue.order.domain.Subscribe;
 import com.ruoyi.project.venue.order.domain.SubscribeDetail;
+import com.ruoyi.project.venue.order.domain.SubscribeTime;
 import com.ruoyi.project.venue.order.mapper.SubscribeDetailMapper;
 import com.ruoyi.project.venue.order.mapper.SubscribeMapper;
 
@@ -96,5 +97,34 @@ public class SubscribeDetailServiceImpl implements ISubscribeDetailService{
 		}
 	
 		return;
+	}
+
+	/**
+	 * 获取有效时间下拉框
+	 */
+	@Override
+	public List<SubscribeTime> getInvalidDateList(int guestNum, Date fromDt,boolean isTypeIngore) {
+		List<SubscribeTime> dtList = new ArrayList<SubscribeTime>();
+		List<SubscribeDetail> list = subscribeDetailMapper.getInvalidDateList(fromDt);
+		for(SubscribeDetail item :list){
+			if(!isTypeIngore){
+				if(guestNum  >= 10 && "1".equals(item.getTypeTeam())){
+					continue;
+				}else if(guestNum  < 10 && "1".equals(item.getTypePerson())){
+					continue;
+				}
+			}
+			SubscribeTime stime = new SubscribeTime();
+			stime.setId(item.getId());
+			String date = DateUtil.formatDate(item.getSubscribeDate(), "yyyy-MM-dd");
+			String time = DateUtil.formatDate(item.getSubscribeFromDt(),"HH:mm");
+	        int hour = Integer.valueOf(time.substring(0, 2));
+	        String apm = "上午";
+	        if(hour > 12){apm = "下午";}
+			
+			stime.setTime(date + " " + apm + " " + time);
+			dtList.add(stime);
+		}
+		return dtList;	
 	}
 }

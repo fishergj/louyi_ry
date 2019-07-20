@@ -50,4 +50,82 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</where>
 		order by a.input_time asc
     </select>
+    
+     <select id="selectOrder" parameterType="int" resultType="Order">
+     	select 
+        	a.id
+			,a.name
+			,a.telephone
+			,a.w_no
+			,a.adult
+			,a.child
+			,a.subscribe_num
+			,a.subscribe_type
+			,a.subscribe_time_id
+			,a.venue
+			,a.remark
+			,a.input_time
+			,a.status
+			,a.auditor
+			,a.audit_time
+			,a.alter_reason
+			,a.create_time
+			,a.update_time
+		from t_order a 
+		where a.id = #{id}
+     </select>
+     
+      <select id="getOrderById" parameterType="Long" resultType="OrderResultBo">
+       select 
+        	a.id
+			,a.name
+			,a.telephone
+			,a.w_no
+			,a.adult
+			,a.child
+			,a.subscribe_num
+			,a.subscribe_type
+			,a.subscribe_time_id
+			,a.venue
+			,a.remark
+			,a.input_time
+			,a.status
+			,a.auditor
+			,a.audit_time
+			,a.alter_reason
+			,a.create_time
+			,a.update_time
+        	,b.name as venueName      
+		from t_order a 
+		left join t_venue b
+		on a.venue = b.id
+        where a.id = #{id}
+    </select>
+     
+     <update id="updateStatus" parameterType="HashMap">
+        update t_order 
+        <set>
+            status = #{status},
+            auditor = #{auditor},
+            audit_time = sysdate(),
+            update_time = sysdate()
+            
+        </set>
+         where Id = #{id}
+    </update>
+    
+     <update id="updateOrderTime" parameterType="OrderResultBo">
+        update t_order 
+        <set>
+            status = #{status},
+            subscribe_time_id = #{subscribe_time_id},
+            alter_reason = #{alter_reason},  
+            input_time = #{input_time},     
+            auditor = #{auditor},
+            audit_time = sysdate(),
+            update_time = sysdate()  
+        </set>
+         where Id = #{id}
+    </update>
+    
 </mapper>
