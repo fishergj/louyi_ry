@@ -1,10 +1,11 @@
-package com.ruoyi.project.venue.orderaudit.mapper;
+package com.ruoyi.project.venue.order.mapper;
 
 import java.util.HashMap;
 import java.util.List;
 
-import com.ruoyi.project.venue.orderaudit.bo.OrderResultBo;
-import com.ruoyi.project.venue.orderaudit.domain.Order;
+import com.ruoyi.project.venue.order.bo.OrderResultBo;
+import com.ruoyi.project.venue.order.domain.Order;
+import com.ruoyi.project.venue.order.domain.OrderStastics;
 
 
 public interface OrderMapper {
@@ -42,5 +43,10 @@ public interface OrderMapper {
 	 * @return
 	 */
 	public int updateOrderTime(OrderResultBo bo);
+	
+	/**
+	 * 统计人数
+	 */
+	public List<OrderStastics> selectOrderStasticsList(Order order);
 
 }

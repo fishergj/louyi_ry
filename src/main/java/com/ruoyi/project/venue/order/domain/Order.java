@@ -1,4 +1,4 @@
-package com.ruoyi.project.venue.orderaudit.domain;
+package com.ruoyi.project.venue.order.domain;
 
 import java.util.Date;
 

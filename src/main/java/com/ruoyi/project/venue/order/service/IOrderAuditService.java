@@ -1,9 +1,9 @@
-package com.ruoyi.project.venue.orderaudit.service;
+package com.ruoyi.project.venue.order.service;
 
 import java.util.List;
 
-import com.ruoyi.project.venue.orderaudit.bo.OrderResultBo;
-import com.ruoyi.project.venue.orderaudit.domain.Order;
+import com.ruoyi.project.venue.order.bo.OrderResultBo;
+import com.ruoyi.project.venue.order.domain.Order;
 
 public interface IOrderAuditService {
 	/**
@@ -34,6 +34,11 @@ public interface IOrderAuditService {
 	 */
 	public int updateStatus(String ids,String status);
 	
+	/**
+	 * 强制更新时间
+	 * @param order
+	 * @return
+	 */
 	public int updateOrderTime(OrderResultBo order);
 	
 }

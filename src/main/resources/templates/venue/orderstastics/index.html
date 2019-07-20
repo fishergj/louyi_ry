@@ -2,7 +2,7 @@
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <meta charset="utf-8">
 <head>
-	<th:block th:include="include :: header('预约审核列表')" />
+	<th:block th:include="include :: header('预约统计列表')" />
 </head>
 <body class="gray-bg">
     <div class="container-div">
@@ -28,6 +28,7 @@
 							<li>
 								预约状态：
 								<select name="status" th:with="type=${@dict.getType('sys_order_status')}">
+								    <option value=0>所有</option>
 									<option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
 								</select>
 							</li>
@@ -45,19 +46,6 @@
 					</div>
 				</form>
 			</div>
-			
-	        <div class="btn-group-sm" id="toolbar" role="group">
-		        <a class="btn btn-success multiple disabled" onclick="$.operate.passAll()" shiro:hasPermission="venue:orderaudit:pass">
-		            <i class="fa fa-thumbs-o-up"></i> 通过
-		        </a>
-		        <a class="btn btn-primary multiple disabled" onclick="$.operate.rejectAll()" shiro:hasPermission="venue:orderaudit:reject">
-		            <i class="fa fa-user-times"></i> 驳回
-		        </a>
-		        <a class="btn btn-danger single disabled" onclick="$.operate.editFull()" shiro:hasPermission="venue:introduce:remove">
-		            <i class="fa fa-wrench"></i> 更改时间
-		        </a>
-	        </div>
-	        
 	        <div class="col-sm-12 select-table table-striped">
 	            <table id="bootstrap-table" data-mobile-responsive="true"></table>
 	        </div>
@@ -65,80 +53,41 @@
     </div>
     <div th:include="include :: footer"></div>
     <script th:inline="javascript">
-        var editFlag = [[${@permission.hasPermi('venue:introduce:edit')}]];
         var types = [[${@dict.getType('sys_order_type')}]];
         var statues = [[${@dict.getType('sys_order_status')}]];
-        var prefix = ctx + "venue/orderaudit";
+        var prefix = ctx + "venue/orderstastics";
   			
         $(function() {
             var options = {
                 url: prefix + "/list",
-                passUrl: prefix + "/pass",
-                updateUrl: prefix + "/editTime/{id}",
-                rejectUrl: prefix + "/reject",
-                modalName: "预约审核",
+                modalName: "预约统计",
                 search: false,
                 columns: [
-                {
-		            checkbox: true
-		        },
 				{
-					field : 'id', 
-					title : '序号',
-					hidden: true
-				},
-				{
-					field : 'name', 
-					title : '姓名' 
-				},
-				{
-					field : 'telephone', 
-					title : '手机号' 
-				},
-				{
-		            field: 'w_no',
-		            title: '微信名'
-		        },
-				{
-		            field: 'adult',
-		            title: '成人人数',
-		            align: 'right',
+		            field: 'orderDt',
+		            title: '预约日期',
 		            sortable: true
-		        },
-				{
-		            field: 'child',
-		            title: '儿童人数',
-		            align: 'right',
-		            sortable: true
-		        },
-				{
-		            field: 'subscribe_type',
-		            title: '预约类型',
-		            align: 'center',
-		            formatter: function(value, row, index) {
-		            	return $.table.selectDictLabel(types, value);
-		            }
-		        },
-				{
-		            field: 'status',
-		            title: '预约状态',
-		            formatter: function(value, row, index) {
-		            	return $.table.selectDictLabel(statues, value);
-		            }
 		        }
 		        ,
 				{
-		            field: 'input_time',
-		            title: '预约时间',
+		            field: 'orderWeeDay',
+		            title: '星期'
+		        },
+				{
+		            field: 'orderSum',
+		            title: '总人数',
+		            align: 'right',
 		            sortable: true
 		        },
 				{
-		            field: 'venueName',
-		            title: '预约场馆'
+		            field: 'orderAdult',
+		            title: '成人人数',
+		            align: 'right'
 		        },
 				{
-		            field: 'remark',
-		            title: '备注'
+		            field: 'orderChild',
+		            title: '儿童人数',
+		            align: 'right'
 		        }
 		       ]
             };

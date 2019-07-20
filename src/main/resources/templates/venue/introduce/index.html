@@ -29,13 +29,13 @@
 			</div>
 			
 	        <div class="btn-group-sm" id="toolbar" role="group">
-		        <a class="btn btn-success" onclick="$.operate.addFull()" shiro:hasPermission="system:notice:add">
+		        <a class="btn btn-success" onclick="$.operate.addFull()" shiro:hasPermission="venue:introduce:add">
 		            <i class="fa fa-plus"></i> 新增
 		        </a>
-		        <a class="btn btn-primary single disabled" onclick="$.operate.editFull()" shiro:hasPermission="system:notice:edit">
+		        <a class="btn btn-primary single disabled" onclick="$.operate.editFull()" shiro:hasPermission="venue:introduce:edit">
 		            <i class="fa fa-edit"></i> 修改
 		        </a>
-		        <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="system:notice:remove">
+		        <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="venue:introduce:remove">
 		            <i class="fa fa-remove"></i> 删除
 		        </a>
 	        </div>
@@ -47,8 +47,8 @@
     </div>
     <div th:include="include :: footer"></div>
     <script th:inline="javascript">
-        var editFlag = [[${@permission.hasPermi('system:notice:edit')}]];
-        var removeFlag = [[${@permission.hasPermi('system:notice:remove')}]];
+        var editFlag = [[${@permission.hasPermi('venue:introduce:edit')}]];
+        var removeFlag = [[${@permission.hasPermi('venue:introduce:remove')}]];
         var types = [[${@dict.getType('sys_introduce_type')}]];
         var prefix = ctx + "venue/introduce";
 

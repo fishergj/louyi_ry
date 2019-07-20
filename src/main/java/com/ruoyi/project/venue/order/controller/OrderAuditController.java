@@ -1,4 +1,4 @@
-package com.ruoyi.project.venue.orderaudit.controller;
+package com.ruoyi.project.venue.order.controller;
 
 import java.util.Date;
 import java.util.List;
@@ -21,9 +21,9 @@ import com.ruoyi.framework.web.domain.AjaxResult;
 import com.ruoyi.framework.web.page.TableDataInfo;
 import com.ruoyi.project.venue.order.domain.SubscribeTime;
 import com.ruoyi.project.venue.order.service.ISubscribeDetailService;
-import com.ruoyi.project.venue.orderaudit.bo.OrderResultBo;
-import com.ruoyi.project.venue.orderaudit.domain.Order;
-import com.ruoyi.project.venue.orderaudit.service.IOrderAuditService;
+import com.ruoyi.project.venue.order.bo.OrderResultBo;
+import com.ruoyi.project.venue.order.domain.Order;
+import com.ruoyi.project.venue.order.service.IOrderAuditService;
 
 /**
  * 预约审核 信息操作处理
