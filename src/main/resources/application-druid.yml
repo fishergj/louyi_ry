@@ -5,17 +5,18 @@ spring:
     druid:
       # 主库数据源
       master:
-        url: jdbc:mysql://localhost:3306/venueorder?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
+        url: jdbc:mysql://localhost:3306/ry?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
         driverClassName: com.mysql.cj.jdbc.Driver
         username: root
-        password: Order@123
+        password: xiaoxiao
       # 从库数据源
       slave:
-        # 从数据源开关/默认关闭
-        enabled: false
-        url:
-        username:
-        password:
+        # 从数据库开关/默认关闭
+        enabled: true
+        url: jdbc:sqlserver://61.152.122.117:1433;databasename=ScreenData80JD
+        driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver
+        username: ENC(ADDA5YGPCQkG4GA6++pebA==)
+        password: ENC(c+kkwn72SPEBurPQd90+ytsR+KLWcdDv)
       # 初始连接数
       initialSize: 5
       # 最小连接池数量
@@ -30,8 +31,8 @@ spring:
       minEvictableIdleTimeMillis: 300000
       # 配置一个连接在池中最大生存的时间，单位是毫秒
       maxEvictableIdleTimeMillis: 900000
-      # 配置检测连接是否有效
-      validationQuery: SELECT 1 FROM DUAL
+      # 配置检测连接是否有效    SELECT 1 FROM DUAL
+      validationQuery: SELECT 1
       testWhileIdle: true
       testOnBorrow: false
       testOnReturn: false
@@ -48,7 +49,9 @@ spring:
           # 慢SQL记录
           log-slow-sql: true
           slow-sql-millis: 1000
-          merge-sql: true
+          #merge sql error, dbType sqlserver, druid, sql: null
+          #将merge-sql: true 改为  merge-sql: false.
+          merge-sql: false
         wall:
           config:
             multi-statement-allow: true

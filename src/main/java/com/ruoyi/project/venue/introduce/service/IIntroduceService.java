@@ -61,4 +61,11 @@ public interface IIntroduceService {
 	 * @return 结果
 	 */
 	public int deleteVenueIntroByIds(String ids);
+
+	/**
+	 * 根据类型获取场馆信息
+	 * @param introduceType 场馆类型
+	 * @return
+	 */
+	public VenueIntro selectVenueIntroByType(int introduceType);
 }

@@ -1,6 +1,8 @@
 package com.ruoyi.project.system.wechat.controller;
 
 import com.ruoyi.framework.web.controller.BaseController;
+import com.ruoyi.project.venue.introduce.domain.VenueIntro;
+import com.ruoyi.project.venue.introduce.service.IIntroduceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,13 +14,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * 场馆介绍
  */
 @Controller
-@RequestMapping("/wechat/meseum")
+@RequestMapping("/wechat/museum")
 public class WechatMuseumController extends BaseController {
 
     private String prefix = "system/museum";
 
-//    @Autowired
-//    private IIntroduceService introduceService;
+    @Autowired
+    private IIntroduceService introduceService;
 
     /**
      * 场馆概述
@@ -34,11 +36,11 @@ public class WechatMuseumController extends BaseController {
      * @param introType
      * @return
      */
-//    @GetMapping("/intro/{introType}")
-//    @ResponseBody
-//    public VenueIntro getVenueIntro(@PathVariable(name="introType") int introType) {
-//        return introduceService.selectVenueIntroByType(introType);
-//    }
+    @GetMapping("/intro/{introType}")
+    @ResponseBody
+    public VenueIntro getVenueIntro(@PathVariable(name="introType") int introType) {
+        return introduceService.selectVenueIntroByType(introType);
+    }
 
     /**
      * 场馆导览
@@ -46,7 +48,7 @@ public class WechatMuseumController extends BaseController {
      */
     @RequestMapping("/guide")
     public String guideVenue() {
-        return "";
+        return prefix + "/guide";
     }
 
     /**
@@ -55,7 +57,7 @@ public class WechatMuseumController extends BaseController {
      */
     @RequestMapping("/exhibit")
     public String introExhibit() {
-        return "";
+        return prefix + "/exhibit";
     }
 
     /**
@@ -64,7 +66,7 @@ public class WechatMuseumController extends BaseController {
      */
     @RequestMapping("/moment")
     public String queryMoment() {
-        return "";
+        return prefix + "/moment";
     }
 
 }

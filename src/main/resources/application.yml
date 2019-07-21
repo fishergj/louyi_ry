@@ -9,7 +9,7 @@ ruoyi:
   # 实例演示开关
   demoEnabled: true
   # 文件路径 示例（ Windows配置D:/ruoyi/uploadPath，Linux配置 /home/ruoyi/uploadPath）
-  profile: D:/ruoyiUpload/uploadPath
+  profile: /Users/jungao/Documents/logs/ruoyi/profile
   # 获取ip地址开关
   addressEnabled: true
 
@@ -27,7 +27,11 @@ server:
     max-threads: 800
     # Tomcat启动初始化的线程数，默认值25
     min-spare-threads: 30
- 
+
+jasypt:
+  encryptor:
+    password: LC!xfBgz0R7rMXg1vgT2sO8rGqCQJX
+
 # 日志配置
 logging:
   level:

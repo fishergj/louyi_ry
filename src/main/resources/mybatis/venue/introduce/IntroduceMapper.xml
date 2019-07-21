@@ -39,6 +39,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</if>
 		</where>
     </select>
+
+	<select id="selectVenueIntroByType" parameterType="Integer" resultType="VenueIntro">
+		<include refid="selectVenueIntroVo"/>
+		where introduceType = #{introduceType}
+	</select>
     
     <insert id="insertVenueIntro" parameterType="VenueIntro">
         insert into t_venue_intro (

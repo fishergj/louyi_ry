@@ -3,6 +3,7 @@ package com.ruoyi.project.venue.introduce.mapper;
 import java.util.List;
 
 import com.ruoyi.project.venue.introduce.domain.VenueIntro;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * 场馆介绍 数据层
@@ -55,4 +56,12 @@ public interface IntroduceMapper {
 	 * @return 结果
 	 */
 	public int deleteVenueIntroByIds(String[] venueIntroIds);
+
+	/**
+	 * 根据类型获取场馆信息
+	 *
+	 * @param introduceType 场馆类型
+	 * @return
+	 */
+	public VenueIntro selectVenueIntroByType(@Param("introduceType") int introduceType);
 }

@@ -90,4 +90,15 @@ public class IntroduceServiceImpl implements IIntroduceService {
 	public List<Venue> selectAllVenues() {
 		return venueMapper.selectAllVenues();
 	}
+
+	/**
+	 * 根据类型获取场馆信息
+	 *
+	 * @param introduceType 场馆类型
+	 * @return
+	 */
+	@Override
+	public VenueIntro selectVenueIntroByType(int introduceType) {
+		return introduceMapper.selectVenueIntroByType(introduceType);
+	}
 }
