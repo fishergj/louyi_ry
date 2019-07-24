@@ -164,6 +164,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			left join t_subscribe_detail c
 			on a.subscribe_time_id = c.id
 	        <where> 
+	        		a.status !=2
 		        <if test="name != null and name != ''">
 					AND a.name like concat('%', #{name}, '%')
 				</if>
@@ -187,5 +188,127 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		) T
 		group by t.subscribeDate,t.weekDay
     </select>
+    
+     <select id="selectHisOrderStastics" parameterType="Order" resultType="OrderStastics">
+       select 
+	       sum(t.subscribe_num) as orderSum,
+	       sum(t.adult) as orderAdult,
+	       sum(t.child) as orderChild,
+	       count(t.id) as orderCount
+       from(
+	       select 
+	        	a.id
+				,a.name
+				,a.telephone
+				,a.w_no
+				,a.adult
+				,a.child
+				,a.subscribe_num
+				,a.subscribe_type
+				,a.subscribe_time_id
+				,a.venue
+				,a.remark
+				,a.input_time
+				,a.status
+				,a.auditor
+				,a.audit_time
+				,a.alter_reason
+				,a.create_time
+				,a.update_time
+	        	,b.name as venueName 
+	        	,c.subscribeDate
+				,c.weekDay   
+			from t_order a 
+			left join t_venue b
+			on a.venue = b.id
+			left join t_subscribe_detail c
+			on a.subscribe_time_id = c.id
+	        <where> 
+	             a.status !=2
+		        <if test="name != null and name != ''">
+					AND a.name like concat('%', #{name}, '%')
+				</if>
+				<if test="telephone != null and telephone != ''">
+					AND a.telephone like concat('%', #{telephone}, '%')
+				</if>
+				<if test="subscribe_type != null and subscribe_type != 0">
+					AND a.subscribe_type = #{subscribe_type}
+				</if>
+				<if test="status != null and status != 0">
+					AND a.status = #{status}
+				</if>
+				<if test="params.beginTime != null and params.beginTime != ''"><!-- 开始时间检索 -->
+					AND date_format(a.input_time,'%y%m%d') &gt;= date_format(#{params.beginTime},'%y%m%d')
+				</if>
+				<if test="params.endTime != null and params.endTime != ''"><!-- 结束时间检索 -->
+					AND date_format(a.input_time,'%y%m%d') &lt;= date_format(#{params.endTime},'%y%m%d')
+				</if>
+			</where>
+			order by a.input_time asc
+		) T
+    </select>
+    
+    <select id="selectHisOrderStasticsByWeek" parameterType="Order" resultType="OrderStastics">
+       select 
+	       sum(t.subscribe_num) as orderSum,
+	       sum(t.adult) as orderAdult,
+	       sum(t.child) as orderChild,
+	       count(t.id) as orderCount,
+	       t.weekDay
+       from(
+	       select 
+	        	a.id
+				,a.name
+				,a.telephone
+				,a.w_no
+				,a.adult
+				,a.child
+				,a.subscribe_num
+				,a.subscribe_type
+				,a.subscribe_time_id
+				,a.venue
+				,a.remark
+				,a.input_time
+				,a.status
+				,a.auditor
+				,a.audit_time
+				,a.alter_reason
+				,a.create_time
+				,a.update_time
+	        	,b.name as venueName 
+	        	,c.subscribeDate
+				,c.weekDay   
+			from t_order a 
+			left join t_venue b
+			on a.venue = b.id
+			left join t_subscribe_detail c
+			on a.subscribe_time_id = c.id
+	        <where> 
+	             a.status !=2
+		        <if test="name != null and name != ''">
+					AND a.name like concat('%', #{name}, '%')
+				</if>
+				<if test="telephone != null and telephone != ''">
+					AND a.telephone like concat('%', #{telephone}, '%')
+				</if>
+				<if test="subscribe_type != null and subscribe_type != 0">
+					AND a.subscribe_type = #{subscribe_type}
+				</if>
+				<if test="status != null and status != 0">
+					AND a.status = #{status}
+				</if>
+				<if test="params.beginTime != null and params.beginTime != ''"><!-- 开始时间检索 -->
+					AND date_format(a.input_time,'%y%m%d') &gt;= date_format(#{params.beginTime},'%y%m%d')
+				</if>
+				<if test="params.endTime != null and params.endTime != ''"><!-- 结束时间检索 -->
+					AND date_format(a.input_time,'%y%m%d') &lt;= date_format(#{params.endTime},'%y%m%d')
+				</if>
+			</where>
+			order by a.input_time asc
+		) T
+		group by t.weekDay
+		order by t.weekDay
+    </select>
+    
     
 </mapper>

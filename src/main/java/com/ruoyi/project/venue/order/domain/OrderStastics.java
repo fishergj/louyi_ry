@@ -13,7 +13,9 @@ public class OrderStastics {
 	private int orderAdult;
 	// 儿童人数
 	private int orderChild;
-
+	// 总预约次数
+	private int orderCount;
+	
 	public String getOrderDt() {
 		return orderDt;
 	}
@@ -61,4 +63,12 @@ public class OrderStastics {
 	public void setOrderChild(int orderChild) {
 		this.orderChild = orderChild;
 	}
+
+	public int getOrderCount() {
+		return orderCount;
+	}
+
+	public void setOrderCount(int orderCount) {
+		this.orderCount = orderCount;
+	}	
 }

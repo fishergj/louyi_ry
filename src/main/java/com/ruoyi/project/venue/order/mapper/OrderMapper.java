@@ -2,7 +2,6 @@ package com.ruoyi.project.venue.order.mapper;
 
 import java.util.HashMap;
 import java.util.List;
-
 import com.ruoyi.project.venue.order.bo.OrderResultBo;
 import com.ruoyi.project.venue.order.domain.Order;
 import com.ruoyi.project.venue.order.domain.OrderStastics;
@@ -48,5 +47,20 @@ public interface OrderMapper {
 	 * 统计人数
 	 */
 	public List<OrderStastics> selectOrderStasticsList(Order order);
+	
+	/**
+	 * 统计历史人数
+	 * @param order
+	 * @return
+	 */
+	public OrderStastics selectHisOrderStastics(Order order);
+	
+	/**
+	 * 按星期统计数据
+	 * @param order
+	 * @return
+	 */
+	public List<OrderStastics> selectHisOrderStasticsByWeek(Order order);
+	
 
 }
