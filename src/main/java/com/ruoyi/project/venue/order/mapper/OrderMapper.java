@@ -56,11 +56,23 @@ public interface OrderMapper {
 	public OrderStastics selectHisOrderStastics(Order order);
 	
 	/**
-	 * 按星期统计数据
+	 * 按星期统计历史数据
 	 * @param order
 	 * @return
 	 */
 	public List<OrderStastics> selectHisOrderStasticsByWeek(Order order);
 	
+	/**
+	 * 按星期统计未来一个星期的数据
+	 * @param map
+	 * @return
+	 */
+	public List<OrderStastics> selectNextOrderStasticsByWeek(HashMap<String,Object> map);
+	
+	/**
+	 * 获取待审核的预约数
+	 * @return
+	 */
+	public int selectWaiteAuditCount();
 
 }

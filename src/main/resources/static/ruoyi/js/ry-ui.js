@@ -262,7 +262,9 @@
                     search.isAsc = params.order;
     		        return search;
     		    }
+    		    console.log("params.queryParams:" + params.queryParams.searchValue);
     		    $.btTable.bootstrapTable('refresh', params);
+    		    
     		},
     		// 导出数据
     		exportExcel: function(formId) {

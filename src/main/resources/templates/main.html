@@ -1,230 +1,231 @@
 <!DOCTYPE html>
-<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<html lang="zh" xmlns:th="http://www.thymeleaf.org"
+	xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
-	<th:block th:include="include :: header('首页')" />
+<meta charset="utf-8">
+<th:block th:include="include :: header('首页')" />
 </head>
 <body class="gray-bg">
-    <div class="wrapper wrapper-content animated fadeInRight">
-        <div class="row">
-            <div class="col-sm-3">
-                <div class="ibox">
-                    <div class="ibox-content">
-                        <h5 class="m-b-md">待审核预约</h5>
-                        <h2 class="text-navy">
-                                    <i class="fa fa-play fa-rotate-270"></i> 10
-                                </h2>
-                        <small>团体</small>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <div class="ibox">
-                    <div class="ibox-content ">
-                        <h5 class="m-b-md">待审核预约</h5>
-                        <h2 class="text-navy">
-                                    <i class="fa fa-play fa-rotate-270"></i> 2
-                                </h2>
-                        <small>个人</small>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-6">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <h5>折线图</h5>
-                        <div class="ibox-tools">
-                            <a class="collapse-link">
-                                <i class="fa fa-chevron-up"></i>
-                            </a>
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="graph_flot.html#">
-                                <i class="fa fa-wrench"></i>
-                            </a>                          
-                            <a class="close-link">
-                                <i class="fa fa-times"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="ibox-content">
-                        <div class="echarts" id="echarts-line-chart"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <h5>柱状图</h5>
-                        <div class="ibox-tools">
-                            <a class="collapse-link">
-                                <i class="fa fa-chevron-up"></i>
-                            </a>
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                <i class="fa fa-wrench"></i>
-                            </a>
-                            <a class="close-link">
-                                <i class="fa fa-times"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="ibox-content">
-
-                        <div class="echarts" id="echarts-bar-chart"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <th:block th:include="include :: footer" />
-    <th:block th:include="include :: peity-js" />
-    <th:block th:include="include :: sparkline-js" />
-    <th:block th:include="include :: echarts-js" />
-    <script type="text/javascript">
-	    $(function() {
-	
-	        $(".line").peity("line",{
-	            fill: '#1ab394',
-	            stroke:'#169c81',
-	        })
-	
-	        $(".bar").peity("bar", {
-	            fill: ["#1ab394", "#d7d7d7"]
-	        })
-	
-	        var updatingChart = $(".updating-chart").peity("line", { fill: '#1ab394',stroke:'#169c81', width: 64 })
-	
-	        setInterval(function() {
-	            var random = Math.round(Math.random() * 10)
-	            var values = updatingChart.text().split(",")
-	            values.shift()
-	            values.push(random)
-	
-	            updatingChart
-	                .text(values.join(","))
-	                .change()
-	        }, 1000);
-	        
-	        var lineChart = echarts.init(document.getElementById("echarts-line-chart"));
-	        var lineoption = {
-	            title : {
-	                text: '未来一周预约情况'
-	            },
-	            tooltip : {
-	                trigger: 'axis'
-	            },
-	            legend: {
-	                data:['人数']
-	            },
-	            grid:{
-	                x:40,
-	                x2:40,
-	                y2:24
-	            },
-	            calculable : true,
-	            xAxis : [
-	                {
-	                    type : 'category',
-	                    boundaryGap : false,
-	                    data : ['周一','周二','周三','周四','周五','周六','周日']
-	                }
-	            ],
-	            yAxis : [
-	                {
-	                    type : 'value',
-	                    axisLabel : {
-	                        formatter: '{value}'
-	                    }
-	                }
-	            ],
-	            series : [
-	                {
-	                    name:'人数',
-	                    type:'line',
-	                    data:[11, 11, 15, 13, 12, 13, 10],
-	                    markPoint : {
-	                        data : [
-	                            {type : 'max', name: '最大值'},
-	                            {type : 'min', name: '最小值'}
-	                        ]
-	                    },
-	                    markLine : {
-	                        data : [
-	                            {type : 'average', name: '平均值'}
-	                        ]
-	                    }
-	                }
-	            ]
-	        };
-	        lineChart.setOption(lineoption);
-	        $(window).resize(lineChart.resize);
-	
-	        var barChart = echarts.init(document.getElementById("echarts-bar-chart"));
-	        var baroption = {
-	            title : {
-	                text: '过去12个月预约人数'
-	            },
-	            tooltip : {
-	                trigger: 'axis'
-	            },
-	            legend: {
-	                data:['团体','个人']
-	            },
-	            grid:{
-	                x:30,
-	                x2:40,
-	                y2:24
-	            },
-	            calculable : true,
-	            xAxis : [
-	                {
-	                    type : 'category',
-	                    data : ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月']
-	                }
-	            ],
-	            yAxis : [
-	                {
-	                    type : 'value'
-	                }
-	            ],
-	            series : [
-	                {
-	                    name:'团体',
-	                    type:'bar',
-	                    data:[2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3],
-	                    markPoint : {
-	                        data : [
-	                            {type : 'max', name: '最大值'},
-	                            {type : 'min', name: '最小值'}
-	                        ]
-	                    },
-	                    markLine : {
-	                        data : [
-	                            {type : 'average', name: '平均值'}
-	                        ]
-	                    }
-	                },
-	                {
-	                    name:'个人',
-	                    type:'bar',
-	                    data:[2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3],
-	                    markPoint : {
-	                        data : [
-	                            {name : '年最高', value : 182.2, xAxis: 7, yAxis: 183, symbolSize:18},
-	                            {name : '年最低', value : 2.3, xAxis: 11, yAxis: 3}
-	                        ]
-	                    },
-	                    markLine : {
-	                        data : [
-	                            {type : 'average', name : '平均值'}
-	                        ]
-	                    }
-	                }
-	            ]
-	        };
-	        barChart.setOption(baroption);
-	
-	        window.onresize = barChart.resize;
+	<div class="wrapper wrapper-content animated fadeInRight">
+		<div class="row">
+			<div class="col-sm-3">
+				<div class="ibox">
+					<div class="ibox-content">
+						<h5 class="m-b-md">待审核</h5>
+						<h2 class="text-navy">
+							<i class="fa fa-play fa-rotate-270"></i> <a
+								onclick="javascript:audit()"
+								shiro:hasPermission="venue:orderaudit:list"><label id="waitAduit" style="cursor:pointer"></label></a>
+						</h2>
+						<small>预约</small>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row" id="stastics">
+			<div class="col-sm-6">
+				<div class="ibox float-e-margins">
+					<div class="ibox-title">
+						<h5>折线图</h5>
+						<div class="ibox-tools">
+							<a class="collapse-link"> <i class="fa fa-chevron-up"></i>
+							</a> <a class="dropdown-toggle" data-toggle="dropdown"
+								href="graph_flot.html#"> <i class="fa fa-wrench"></i>
+							</a> <a class="close-link"> <i class="fa fa-times"></i>
+							</a>
+						</div>
+					</div>
+					<div class="ibox-content">
+						<div class="echarts" id="echarts-line-chart"></div>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-6">
+				<div class="ibox float-e-margins">
+					<div class="ibox-title">
+						<h5>柱状图</h5>
+						<div class="ibox-tools">
+							<a class="collapse-link"> <i class="fa fa-chevron-up"></i>
+							</a> <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+								<i class="fa fa-wrench"></i>
+							</a> <a class="close-link"> <i class="fa fa-times"></i>
+							</a>
+						</div>
+					</div>
+					<div class="ibox-content">
+						<div class="echarts" id="echarts-bar-chart"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<th:block th:include="include :: footer" />
+	<th:block th:include="include :: peity-js" />
+	<th:block th:include="include :: sparkline-js" />
+	<th:block th:include="include :: echarts-js" />
+	<script type="text/javascript">
+	    var prefix = ctx + "venue/orderIndex";
+		var weekDayName = ["","","","","",""];
+		var dataDaySum = [0, 0, 0, 0, 0, 0];
+		var dataDayAdultSum = [0, 0,0, 0,0,0];
+		var dataDayChildSum = [0, 0,0, 0, 0,0];
+	    $(document).ready(function(){            
+        	var _this = this;
+        	console.log(prefix);
+        	$.post(prefix + "/index",{},function(data){
+        		// 待审核数赋值
+        		$('#waitAduit').html(data.auditNum);
+    			// 折线图赋值
+    			_this.weekDayName = data.weekDayName;
+    			_this.dataDaySum = data.dataDaySum;
+    			console.log(data.dataDaySum);
+    			console.log("_this.dataDaySum :"+_this.dataDaySum);
+    			console.log("_this.weekDayName :"+_this.weekDayName);
+    			$("#stastics").show();
+    			// 柱状图赋值
+    			_this.dataDayAdultSum = data.dataDayAdultSum;
+    			_this.dataDayChildSum =  data.dataDayChildSum;
+    			console.log("_this.dataDayAdultSum :"+_this.dataDayAdultSum);
+    			console.log("_this.dataDayChildSum :"+_this.dataDayChildSum);
+    			$(".line").peity("line",{
+    	            fill: '#1ab394',
+    	            stroke:'#169c81',
+    	        })
+    	
+    	        $(".bar").peity("bar", {
+    	            fill: ["#1ab394", "#d7d7d7"]
+    	        })
+    	        var lineChart = echarts.init(document.getElementById("echarts-line-chart"));
+    		        var lineoption = {
+    		            title : {
+    		                text: '未来一周预约总人数'
+    		            },
+    		            tooltip : {
+    		                trigger: 'axis'
+    		            },
+    		            legend: {
+    		                data:['人数']
+    		            },
+    		            grid:{
+    		                x:40,
+    		                x2:40,
+    		                y2:24
+    		            },
+    		            calculable : true,
+    		            xAxis : [
+    		                {
+    		                    type : 'category',
+    		                    boundaryGap : false,
+    		                    data : _this.weekDayName
+    		                }
+    		            ],
+    		            yAxis : [
+    		                {
+    		                    type : 'value',
+    		                    axisLabel : {
+    		                        formatter: '{value}'
+    		                    }
+    		                }
+    		            ],
+    		            series : [
+    		                {
+    		                    name:'人数',
+    		                    type:'line',
+    		                    data:_this.dataDaySum,
+    		                    markPoint : {
+    		                        data : [
+    		                            {type : 'max', name: '最大值'},
+    		                            {type : 'min', name: '最小值'}
+    		                        ]
+    		                    },
+    		                    markLine : {
+    		                        data : [
+    		                            {type : 'average', name: '平均值'}
+    		                        ]
+    		                    }
+    		                }
+    		            ]
+    		        };
+    		        lineChart.setOption(lineoption);
+    		        $(window).resize(lineChart.resize);
+    		
+    		        var barChart = echarts.init(document.getElementById("echarts-bar-chart"));
+    		        var baroption = {
+    		            title : {
+    		                text: '未来一周各类型预约人数'
+    		            },
+    		            tooltip : {
+    		                trigger: 'axis'
+    		            },
+    		            legend: {
+    		                data:['成人','儿童']
+    		            },
+    		            grid:{
+    		                x:30,
+    		                x2:40,
+    		                y2:24
+    		            },
+    		            calculable : true,
+    		            xAxis : [
+    		                {
+    		                    type : 'category',
+    		                    data : _this.weekDayName
+    		                }
+    		            ],
+    		            yAxis : [
+    		                {
+    		                    type : 'value'
+    		                }
+    		            ],
+    		            series : [
+    		                {
+    		                    name: '成人',
+    		                    type: 'bar',
+    		                    data: _this.dataDayAdultSum,
+    		                    markPoint : {
+    		                        data : [
+    		                            {type : 'max', name: '最大值'},
+    		                            {type : 'min', name: '最小值'}
+    		                        ]
+    		                    },
+    		                    markLine : {
+    		                        data : [
+    		                            {type : 'average', name: '平均值'}
+    		                        ]
+    		                    }
+    		                },
+    		                {
+    		                    name:'儿童',
+    		                    type:'bar',
+    		                    data:_this.dataDayChildSum,
+    		                    markPoint : {
+    		                        data : [
+    		                            {type : 'max', name: '最大值'},
+    		                            {type : 'min', name: '最小值'}
+    		                        ]
+    		                    },
+    		                    markLine : {
+    		                        data : [
+    		                            {type : 'average', name : '平均值'}
+    		                        ]
+    		                    }
+    		                }
+    		            ]
+    		        };
+    		        barChart.setOption(baroption);    		
+    		        window.onresize = barChart.resize;
+	    	});
 	    });
+	    
+	    $(function() {	            
+	        
+	      
+        });
+		    /* 预约审核一览*/
+		function audit() {
+			var url = ctx + 'venue/orderaudit';
+			$.modal.openTab("预约审核", url);
+		}
     </script>
 </body>
 </html>

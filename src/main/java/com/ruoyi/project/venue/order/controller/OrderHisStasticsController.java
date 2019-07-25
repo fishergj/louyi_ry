@@ -13,7 +13,7 @@ import com.ruoyi.project.venue.order.domain.Order;
 import com.ruoyi.project.venue.order.service.IOrderHisStasticsService;
 
 /**
- * 预约审核 信息操作处理
+ * 预约历史统计 信息操作处理
  * 
  * @author jungao
  * @date Dec 14, 2018 2:04:04 PM
@@ -33,7 +33,7 @@ public class OrderHisStasticsController extends BaseController {
 	}
 
 	/**
-	 * 查询预约审核列表
+	 * 查询预约历史统计列表
 	 */
 	@RequiresPermissions("venue:orderhisstastics:list")
 	@PostMapping("/list")
@@ -41,23 +41,5 @@ public class OrderHisStasticsController extends BaseController {
 	public OrderHisStastics list(Order order) {		
 		OrderHisStastics info = OrderHisStasticsService.selectStasticsResult(order);
 		return info;
-	}
-	
-//	/**
-//	 * 查询预约审核列表
-//	 */
-//	@GetMapping("/test")
-//	public String test(String name,String telephone) {
-//		
-//		return "123";
-//	}
-	
-	/**
-	 * 查询预约审核列表
-	 */
-	@PostMapping("/test")
-	@ResponseBody
-	public String test(Order order) {
-		return "111111111";
 	}
 }
