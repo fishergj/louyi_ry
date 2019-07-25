@@ -29,6 +29,10 @@ public class RuoYiConfig
 
     /** 获取地址开关 */
     private static boolean addressEnabled;
+    
+    private int maxDay;
+    
+    private int periodMaxPerson;
 
     public String getName()
     {
@@ -113,4 +117,22 @@ public class RuoYiConfig
     {
         return getProfile() + "/upload";
     }
+
+	public int getMaxDay() {
+		return maxDay;
+	}
+
+	public void setMaxDay(int maxDay) {
+		this.maxDay = maxDay;
+	}
+
+	public int getPeriodMaxPerson() {
+		return periodMaxPerson;
+	}
+
+	public void setPeriodMaxPerson(int periodMaxPerson) {
+		this.periodMaxPerson = periodMaxPerson;
+	}
+
+	
 }

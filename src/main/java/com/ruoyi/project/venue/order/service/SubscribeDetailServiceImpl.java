@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.ruoyi.common.utils.CommonUtil;
 import com.ruoyi.common.utils.DateUtil;
 import com.ruoyi.common.utils.TimeUtil;
+import com.ruoyi.framework.config.RuoYiConfig;
 import com.ruoyi.project.venue.introduce.domain.Venue;
 import com.ruoyi.project.venue.introduce.mapper.VenueMapper;
 import com.ruoyi.project.venue.order.domain.Subscribe;
@@ -33,7 +34,10 @@ public class SubscribeDetailServiceImpl implements ISubscribeDetailService{
 	@Autowired
 	private SubscribeDetailMapper subscribeDetailMapper;
 	
-	private int maxDay = 10;
+	@Autowired
+    private RuoYiConfig ruoYiConfig;
+	
+	//private int maxDay = 10;
 	
 	/**
 	 * 批量插入预约时间数据
@@ -42,6 +46,7 @@ public class SubscribeDetailServiceImpl implements ISubscribeDetailService{
 	 */
 	@Transactional
 	public void insertBatchDetails() {
+		int maxDay = ruoYiConfig.getMaxDay();
 		List<Subscribe> list = subscribeMapper.selectAllSubscribes();
 		if(list == null || list.size() == 0) return;
 		// 根据工作日分组
@@ -105,7 +110,10 @@ public class SubscribeDetailServiceImpl implements ISubscribeDetailService{
 	@Override
 	public List<SubscribeTime> getInvalidDateList(int guestNum, Date fromDt,boolean isTypeIngore) {
 		List<SubscribeTime> dtList = new ArrayList<SubscribeTime>();
-		List<SubscribeDetail> list = subscribeDetailMapper.getInvalidDateList(fromDt);
+		HashMap<String,Object> map = new HashMap<String,Object>();
+		map.put("fromDt", fromDt);
+		map.put("periodMaxPerson", ruoYiConfig.getPeriodMaxPerson());
+		List<SubscribeDetail> list = subscribeDetailMapper.getInvalidDateList(map);
 		for(SubscribeDetail item :list){
 			if(!isTypeIngore){
 				if(guestNum  >= 10 && "1".equals(item.getTypeTeam())){

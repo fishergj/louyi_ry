@@ -28,7 +28,7 @@ public interface SubscribeDetailMapper {
 	 * @param nowDate
 	 * @return
 	 */
-	public List<SubscribeDetail> getInvalidDateList(Date fromDt);
+	public List<SubscribeDetail> getInvalidDateList(HashMap<String,Object> map);
 	
 	/**
 	 * 获取开始时间

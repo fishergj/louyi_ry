@@ -55,10 +55,33 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          and subscribeFromDt = #{subscribeFromDt,jdbcType=TIMESTAMP}
      </select>
      
-     <select id="getInvalidDateList" parameterType="Date" resultType="SubscribeDetail">
-      <include refid="selectSubscribeDeatailVo"/>
-        where CONCAT(date_format(subscribeDate,'%Y-%m-%d'),' ', subscribeFromDt) > #{fromDt,jdbcType=TIMESTAMP}
-        order by subscribeDate,subscribeFromDt 
+     <select id="getInvalidDateList" parameterType="Map" resultType="SubscribeDetail">   
+        SELECT
+			id,
+			weekDay,
+			subscribeDate,
+			subscribeFromDt,
+			subscribeToDt,
+			typeTeam,
+			typePerson,
+			venueId,
+			create_time,
+			update_time
+		FROM
+			t_subscribe_detail detail
+		LEFT JOIN (
+			SELECT
+				sum(subscribe_num) totalPerson,
+				subscribe_time_id
+		FROM
+				t_order
+			GROUP BY subscribe_time_id
+		) subscribeSum
+		on detail.id = subscribeSum.subscribe_time_id
+		WHERE
+			CONCAT(date_format(subscribeDate, '%Y-%m-%d'),' ',subscribeFromDt) >  #{fromDt,jdbcType=TIMESTAMP}
+		    and (subscribeSum.totalPerson &lt;  #{periodMaxPerson} or subscribeSum.totalPerson  is null)
+		ORDER BY subscribeDate,subscribeFromDt
      </select>
      
       <select id="selectFromDtById" parameterType="int" resultType="Date">

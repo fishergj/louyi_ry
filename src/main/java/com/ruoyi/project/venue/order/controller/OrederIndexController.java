@@ -9,14 +9,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ruoyi.framework.web.controller.BaseController;
 import com.ruoyi.project.venue.order.bo.OrderIndex;
-import com.ruoyi.project.venue.order.domain.Order;
 import com.ruoyi.project.venue.order.service.IOrderIndexService;
 @Controller
 @RequestMapping("/venue/orderIndex")
 public class OrederIndexController extends BaseController {
-
-//	private String prefix = "venue/orderIndex";
-
+	
 	@Autowired
 	private IOrderIndexService orderIndexService;
 	
