@@ -48,7 +48,7 @@ user:
 spring:
   # 模板引擎
   thymeleaf:
-    mode: HTML
+    mode: LEGACYHTML5   # 非严格型检查 默认是html 严格检查
     encoding: utf-8
     # 禁用缓存
     cache: false
