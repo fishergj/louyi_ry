@@ -1,0 +1,296 @@
+<!DOCTYPE HTML>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<meta charset="utf-8">
+<head>
+<th:block th:include="include :: header('预约统计列表')" />
+</head>
+<body class="gray-bg">
+
+	<div class="wrapper wrapper-content animated fadeInRight">
+		<div class="row">
+			<div class="col-sm-24">
+				<div class="container-div">
+					<div class="row">
+						<div class="col-sm-12 search-collapse">
+								<div class="select-list">
+									<ul>
+										<li>手机号码：<input id="telephone" type="text"
+											name="telephone" />
+										</li>
+										<li>预约人姓名：<input id="name" type="text" name="name" />
+										</li>
+
+										<li>预约类型： <select id="subscribe_type"
+											name="subscribe_type"
+											th:with="type=${@dict.getType('sys_order_type')}">
+												<option value=0>所有</option>
+												<option th:each="dict : ${type}" th:text="${dict.dictLabel}"
+													th:value="${dict.dictValue}"></option>
+										</select>
+										</li>
+										<li>预约状态： <select id="status" name="status"
+											th:with="type=${@dict.getType('sys_order_status')}">
+												<option value=0>所有</option>
+												<option th:each="dict : ${type}" th:text="${dict.dictLabel}"
+													th:value="${dict.dictValue}"></option>
+										</select>
+										</li>
+										<li class="select-time"><label>预约时间： </label> 
+											<input type="text" class="time-input" id="beginTime"
+											placeholder="开始时间" name="params[beginTime]" /> 
+											<span>-</span>
+											<input type="text" class="time-input" id="endTimes"
+											placeholder="结束时间" name="params[endTime]" /> 
+										</li>
+										<li>
+											<button onclick="search()" class="btn btn-primary btn-rounded btn-sm"><i class="fa fa-search"></i>&nbsp;搜索</button>
+											<button onclick="reset()"  class="btn btn-warning btn-rounded btn-sm"><i class="fa fa-refresh"></i>&nbsp;重置</button>
+										</li>
+									</ul>
+								</div>
+						</div>
+						
+						<div>&nbsp;</div>
+						<div class="ibox-content" id="stastic1" style="display:none">
+							<div class="row">
+								<div class="col-sm-12">
+									<table class="table table-hover margin bottom">
+										<tbody>
+											<tr>
+												<td>总预约次数</td>
+												<td>总人数</td>
+												<td>成人人数</td>
+												<td>儿童人数</td>
+											</tr>
+											<tr>
+												<td id="total">0</td>
+												<td id="totalPerson">0</td>
+												<td id="audltPerson">0</td>
+												<td id="childPerson">0</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div>&nbsp;</div>
+		<div class="row" id="stastic2" style="display:none">
+			<div class="col-sm-6">
+				<div class="ibox float-e-margins">
+					<div class="ibox-title">
+						<h5>折线图</h5>
+						<div class="ibox-tools">
+							<a class="collapse-link"> <i class="fa fa-chevron-up"></i>
+							</a> <a class="dropdown-toggle" data-toggle="dropdown"
+								href="graph_flot.html#"> <i class="fa fa-wrench"></i>
+							</a> <a class="close-link"> <i class="fa fa-times"></i>
+							</a>
+						</div>
+					</div>
+					<div class="ibox-content">
+						<div class="echarts" id="echarts-line-chart"></div>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-6">
+				<div class="ibox float-e-margins">
+					<div class="ibox-title">
+						<h5>柱状图</h5>
+						<div class="ibox-tools">
+							<a class="collapse-link"> <i class="fa fa-chevron-up"></i>
+							</a> <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+								<i class="fa fa-wrench"></i>
+							</a> <a class="close-link"> <i class="fa fa-times"></i>
+							</a>
+						</div>
+					</div>
+					<div class="ibox-content">
+						<div class="echarts" id="echarts-bar-chart"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div th:include="include :: footer"></div>
+	<th:block th:include="include :: echarts-js" />
+	<th:block th:include="include :: peity-js" />
+	<th:block th:include="include :: sparkline-js" />
+	<script th:inline="javascript">
+        var types = [[${@dict.getType('sys_order_type')}]];
+        var statues = [[${@dict.getType('sys_order_status')}]];
+        var prefix = ctx + "venue/orderhisstastics";
+        var dataDaySum = [0, 0, 0, 0, 0, 0];
+        var dataDayAdultSum = [0, 0,0, 0,0,0];
+        var dataDayChildSum = [0, 0,0, 0, 0,0];
+  			
+        function search(){
+        	var body = {
+       			'telephone':$('#telephone').val()
+       			,'name':$('#name').val()
+       			,'subscribe_type':$("#subscribe_type").val()
+       			,'status':$("#status").val()
+       			,'params[beginTime]':$('#beginTime').val()
+       			,'params[endTime]':$('#endTimes').val()
+      	    };
+        	console.log("body:"+ JSON.stringify(body));
+        	var _this = this;
+        	$.post(prefix + "/list",body,function(data){
+        		//统计画面显示
+        		$("#stastic1").show();
+        		$("#stastic2").show();
+        		
+        		var tbData = data.stastics
+				// 表格赋值
+				$('#total').html(tbData.orderCount);
+				$('#totalPerson').html(tbData.orderSum);
+				$('#audltPerson').html(tbData.orderAdult);
+				$('#childPerson').html(tbData.orderChild);
+				// 折线图赋值
+				_this.dataDaySum = data.dataDaySum;
+				console.log(data.dataDaySum);
+				console.log("_this.dataDaySum :"+_this.dataDaySum);
+				// 柱状图赋值
+				_this.dataDayAdultSum = data.dataDayAdultSum;
+				_this.dataDayChildSum =  data.dataDayChildSum;
+				 var lineChart = echarts.init(document.getElementById("echarts-line-chart"));
+			        var lineoption = {
+			            title : {
+			                text: '一周预约总人数'
+			            },
+			            tooltip : {
+			                trigger: 'axis'
+			            },
+			            legend: {
+			                data:['人数']
+			            },
+			            grid:{
+			                x:40,
+			                x2:40,
+			                y2:24
+			            },
+			            calculable : true,
+			            xAxis : [
+			                {
+			                    type : 'category',
+			                    boundaryGap : false,
+			                    data : ['周一','周二','周三','周四','周五','周六']
+			                }
+			            ],
+			            yAxis : [
+			                {
+			                    type : 'value',
+			                    axisLabel : {
+			                        formatter: '{value}'
+			                    }
+			                }
+			            ],
+			            series : [
+			                {
+			                    name:'人数',
+			                    type:'line',
+			                    data:dataDaySum,
+			                    markPoint : {
+			                        data : [
+			                            {type : 'max', name: '最大值'},
+			                            {type : 'min', name: '最小值'}
+			                        ]
+			                    },
+			                    markLine : {
+			                        data : [
+			                            {type : 'average', name: '平均值'}
+			                        ]
+			                    }
+			                }
+			            ]
+			        };
+			        lineChart.setOption(lineoption);
+			        $(window).resize(lineChart.resize);
+			
+			        var barChart = echarts.init(document.getElementById("echarts-bar-chart"));
+			        var baroption = {
+			            title : {
+			                text: '一周各类型预约人数'
+			            },
+			            tooltip : {
+			                trigger: 'axis'
+			            },
+			            legend: {
+			                data:['成人','儿童']
+			            },
+			            grid:{
+			                x:30,
+			                x2:40,
+			                y2:24
+			            },
+			            calculable : true,
+			            xAxis : [
+			                {
+			                    type : 'category',
+			                    data : ['周一','周二','周三','周四','周五','周六']
+			                }
+			            ],
+			            yAxis : [
+			                {
+			                    type : 'value'
+			                }
+			            ],
+			            series : [
+			                {
+			                    name:'成人',
+			                    type:'bar',
+			                    data:dataDayAdultSum,
+			                    markPoint : {
+			                        data : [
+			                            {type : 'max', name: '最大值'},
+			                            {type : 'min', name: '最小值'}
+			                        ]
+			                    },
+			                    markLine : {
+			                        data : [
+			                            {type : 'average', name: '平均值'}
+			                        ]
+			                    }
+			                },
+			                {
+			                    name:'儿童',
+			                    type:'bar',
+			                    data:dataDayChildSum,
+			                    markPoint : {
+			                        data : [
+			                            {type : 'max', name: '最大值'},
+			                            {type : 'min', name: '最小值'}
+			                        ]
+			                    },
+			                    markLine : {
+			                        data : [
+			                            {type : 'average', name : '平均值'}
+			                        ]
+			                    }
+			                }
+			            ]
+			        };
+			        barChart.setOption(baroption);
+			
+			        window.onresize = barChart.resize;
+			   });
+        }
+        
+        $(function() {	            
+	        $(".line").peity("line",{
+	            fill: '#1ab394',
+	            stroke:'#169c81',
+	        })
+	
+	        $(".bar").peity("bar", {
+	            fill: ["#1ab394", "#d7d7d7"]
+	        })
+	      
+        });
+    </script>
+</body>
+</html>

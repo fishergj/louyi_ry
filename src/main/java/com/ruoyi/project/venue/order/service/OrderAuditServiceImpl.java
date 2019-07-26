@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.ruoyi.common.utils.DateUtil;
 import com.ruoyi.common.utils.security.ShiroUtils;
+import com.ruoyi.framework.config.RuoYiConfig;
 import com.ruoyi.project.venue.order.mapper.SubscribeDetailMapper;
 import com.ruoyi.project.venue.order.bo.OrderResultBo;
 import com.ruoyi.project.venue.order.domain.Order;
@@ -22,6 +23,8 @@ public class OrderAuditServiceImpl implements IOrderAuditService{
 	private OrderMapper orderMapper;
 	@Autowired
 	private SubscribeDetailMapper subscribeDetailMapper;
+	@Autowired
+    private RuoYiConfig ruoYiConfig;
 	@Override
 	public List<Order> selectOrderList(Order searchBo) {
 		return orderMapper.selectOrderList(searchBo);
@@ -86,5 +89,18 @@ public class OrderAuditServiceImpl implements IOrderAuditService{
 	    }
 	    order.setInput_time(fromDt);
 		return orderMapper.updateOrderTime(order);
+	}
+
+	/**
+	 * 检查一个时间段内的人数
+	 */
+	@Override
+	public String checkPeriodNum(int scheduleTimeId,int orderPersonNum) {
+		// TODO Auto-generated method stub
+		int orderSum = orderMapper.selectSubscribePerson(scheduleTimeId);
+		if(orderSum + orderPersonNum >ruoYiConfig.getPeriodMaxPerson() ){
+			return "该时间段预约人数已满，请选择其他时间段！";
+		}
+		return null;
 	}	
 }
