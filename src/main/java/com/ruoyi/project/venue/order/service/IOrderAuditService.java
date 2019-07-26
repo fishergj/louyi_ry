@@ -27,6 +27,13 @@ public interface IOrderAuditService {
 	public String checkPassOrderState(String ids,String statusName);
 	
 	/**
+	 * 检查一个时间段内的人数
+	 * @param id
+	 * @return
+	 */
+	public String checkPeriodNum(int scheduleTimeId,int orderPersonNum);
+	
+	/**
 	 * 改变预约状态
 	 * @param ids
 	 * @param status

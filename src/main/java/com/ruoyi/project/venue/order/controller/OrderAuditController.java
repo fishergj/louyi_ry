@@ -125,6 +125,11 @@ public class OrderAuditController extends BaseController {
 		if(StringUtil.isNotEmpty(checkMsg)){
 			return AjaxResult.warn(checkMsg);
 		}
+		// 检查该时间段内的人数有没有约满
+		String checkPeriodMsg = orderAuditService.checkPeriodNum(order.getSubscribe_time_id(), order.getSubscribe_num());
+		if(StringUtil.isNotEmpty(checkPeriodMsg)){
+			return AjaxResult.warn(checkPeriodMsg);
+		}
 		int rst = orderAuditService.updateOrderTime(order);
 		if(rst == 1){
 			return AjaxResult.success("更改预约时间成功");

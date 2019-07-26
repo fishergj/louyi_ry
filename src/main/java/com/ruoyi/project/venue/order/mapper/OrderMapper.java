@@ -74,5 +74,11 @@ public interface OrderMapper {
 	 * @return
 	 */
 	public int selectWaiteAuditCount();
-
+	
+	/**
+	 * 某一个时间段预约总人数
+	 * @param selectSubscribePerson
+	 * @return
+	 */
+	public int selectSubscribePerson(int id);
 }

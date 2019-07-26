@@ -32,8 +32,7 @@ public class SubscribeDetailServiceImpl implements ISubscribeDetailService{
 	@Autowired
 	private SubscribeMapper subscribeMapper;
 	@Autowired
-	private SubscribeDetailMapper subscribeDetailMapper;
-	
+	private SubscribeDetailMapper subscribeDetailMapper;	
 	@Autowired
     private RuoYiConfig ruoYiConfig;
 	
