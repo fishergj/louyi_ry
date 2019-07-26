@@ -2,6 +2,7 @@ package com.ruoyi.project.system.wechat.controller;
 
 import com.ruoyi.framework.web.controller.BaseController;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -13,9 +14,9 @@ public class WechatReserveController extends BaseController {
      * 参观预约
      * @return
      */
-    @RequestMapping("/")
+    @GetMapping("/doReserve")
     public String doReserve() {
-        return "";
+        return prefix + "/doReserve";
     }
 
     /**

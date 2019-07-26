@@ -823,6 +823,34 @@
         			$.operate.submit(url, "post", "json", data);
         		});
             },
+            // 批量通过
+            passAll: function() {
+        		var rows = $.common.isEmpty($.table._option.uniqueId) ? $.table.selectFirstColumns() : $.table.selectColumns($.table._option.uniqueId);
+        		if (rows.length == 0) {
+        			$.modal.alertWarning("请至少选择一条记录");
+        			return;
+        		}
+        		$.modal.confirm("确认要通过选中的" + rows.length + "条数据吗?", function() {
+        			var url = $.table._option.passUrl;
+        			var data = { "ids": rows.join() };
+        			$.operate.submit(url, "post", "json", data);
+        		});
+            },
+            
+            // 批量驳回
+            rejectAll: function() {
+        		var rows = $.common.isEmpty($.table._option.uniqueId) ? $.table.selectFirstColumns() : $.table.selectColumns($.table._option.uniqueId);
+        		if (rows.length == 0) {
+        			$.modal.alertWarning("请至少选择一条记录");
+        			return;
+        		}
+        		$.modal.confirm("确认要驳回选中的" + rows.length + "条数据吗?", function() {
+        			var url = $.table._option.rejectUrl;
+        			var data = { "ids": rows.join() };
+        			$.operate.submit(url, "post", "json", data);
+        		});
+            },
+            
             // 清空信息
             clean: function() {
             	$.modal.confirm("确定清空所有" + $.table._option.modalName + "吗？", function() {

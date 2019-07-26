@@ -1,15 +1,15 @@
 # 项目相关配置
 ruoyi:
   # 名称
-  name: RuoYi
+  name: 嘉定气象科普馆
   # 版本
   version: 3.4.0
   # 版权年份
   copyrightYear: 2019
   # 实例演示开关
-  demoEnabled: false
+  demoEnabled: true
   # 文件路径 示例（ Windows配置D:/ruoyi/uploadPath，Linux配置 /home/ruoyi/uploadPath）
-  profile: /Users/jungao/Documents/project/file_repo/profile
+  profile: /Users/jungao/Documents/logs/ruoyi/profile
   # 获取ip地址开关
   addressEnabled: true
 
@@ -27,7 +27,11 @@ server:
     max-threads: 800
     # Tomcat启动初始化的线程数，默认值25
     min-spare-threads: 30
- 
+
+jasypt:
+  encryptor:
+    password: LC!xfBgz0R7rMXg1vgT2sO8rGqCQJX
+
 # 日志配置
 logging:
   level:
@@ -44,7 +48,7 @@ user:
 spring:
   # 模板引擎
   thymeleaf:
-    mode: HTML
+    mode: LEGACYHTML5   # 非严格型检查 默认是html 严格检查
     encoding: utf-8
     # 禁用缓存
     cache: false

@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <link th:href="@{/css/style1.css}" rel="stylesheet">
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
+    <link th:href="@{/css/media.css}" rel="stylesheet">
+    <link th:href="@{/css/jquery.fancybox.css}" rel="stylesheet">
+    <link th:href="@{/css/font-awesome.min.css}" rel="stylesheet" >
+    <link th:href="@{/css/owl.carousel.css}" rel="stylesheet">
+    <link th:href="@{/css/owl.theme.css}" rel="stylesheet">
+    <link th:href="@{/css/animate.css}" rel="stylesheet">
+    <link th:href="@{/css/jpushmenu.css}" rel="stylesheet">
+
+    <title>预约服务</title>
+</head>
+<body class="push-body">
+<header id="main-navigation">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12"> <a href="#" class="navbar-brand pull-right"></a>
+                <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left"> <a href="#" class="push_nav_brand">Alex Mia</a>
+                    <ul class="push_nav">
+                        <li><a class="active scroll" href="#home">Home</a></li>
+                        <li><a class="scroll" href="#reservesec">参观预约</a></li>
+                        <li><a class="scroll" href="#contactme">Contact ME</a></li>
+                        <li><a class="scroll" href="#aboutme">About Me</a></li>
+                        <li><a class="scroll" href="#mywork">My Work</a></li>
+                    </ul>
+                    <ul class="icons">
+                        <li><a href="#." class="fa"><i class="fa fa-fw fa-facebook"></i></a></li>
+                        <li><a href="#." class="fa"><i class="fa fa-fw fa-twitter"></i></a></li>
+                        <li><a href="#." class="fa"><i class="fa fa-fw fa-google-plus"></i></a></li>
+                        <li><a href="#." class="fa"><i class="fa fa-fw fa-linkedin"></i></a></li>
+                        <li><a href="#." class="fa"><i class="fa fa-fw fa-pinterest-p"></i></a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+<div class="container-fluid">
+    <div class="main-button left">
+        <button class="toggle-menu menu-left push-body"> <span></span> <span></span> <span></span> </button>
+    </div>
+</div>
+
+<!-- Info-->
+<div id="home" class="row section">
+    <div class="container info text-center">
+        <div class="row">
+            <div class="col-xs-12 text-center">
+                <div class="info_detail">
+                    <div class="zoom">
+                        <img th:src="@{/images/alex.jpg}" alt="alex">
+                        <div class="zoom-overlay"></div>
+                    </div>
+                    <h3>Alexander Mia</h3>
+                    <p>Creative Designer / Team Lead</p>
+                    <!-- Social Icons -->
+                    <div class="icons">
+                        <ul>
+                            <li><a href="#." class="fa fb"><i class="fa fa-fw fa-facebook"></i></a></li>
+                            <li><a href="#." class="fa tw"><i class="fa fa-fw fa-twitter"></i></a></li>
+                            <li><a href="#." class="fa gp"><i class="fa fa-fw fa-google-plus"></i></a></li>
+                            <li><a href="#." class="fa in"><i class="fa fa-fw fa-linkedin"></i></a></li>
+                            <li><a href="#." class="fa pin"><i class="fa fa-fw fa-pinterest-p"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="button"> <a href="#contactme" data-target="contactme" class="btn active scroll">Hire Me</a> <a href="#mywork" data-target="mywork" class="btn scroll">My Work</a> </div>
+    </div>
+</div>
+
+<!-- contact me -->
+<div id="reservesec" class="row section">
+    <div class="container contact">
+
+        <div class="col-xs-12 text-center">
+            <div class="animate fadeInRight">
+                <div class="heading">
+                    <h1>参观预约</h1>
+                    <p>请认真填写参观预约信息</p>
+                </div>
+            </div>
+            <div id="reserve">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label for="name" class="control-label col-sm-2 col-sm-offset-2" style="color:white">预约人姓名：</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="name" v-model="order.name" placeholder="请填写预约人姓名">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="telephone" class="control-label col-sm-2 col-sm-offset-2" style="color:white">预约人电话：</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="telephone" v-model="order.telephone" placeholder="请输入您的手机号码">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="adult" class="control-label col-sm-2 col-sm-offset-2" style="color:white">成人人数：</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="adult" v-model="order.adult" placeholder="请输入成人人数">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="child" class="control-label col-sm-2 col-sm-offset-2" style="color:white">儿童人数：</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="child" v-model="order.child" placeholder="请输入儿童人数">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="subscribe_time" class="control-label col-sm-2 col-sm-offset-2" style="color:white">参观时间选择：</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="subscribe_time" v-model="order.subscribe_time" placeholder="请选择合适的参观时间"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="venue" class="control-label col-sm-2 col-sm-offset-2" style="color:white">预约场馆：</label>
+                        <div class="col-sm-6">
+                            <select class="form-control" id="venue" v-model="order.venue" placeholder="请选择参观场馆">
+                                <option value="1">嘉定气象科普馆</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="remark" class="control-label col-sm-2 col-sm-offset-2" style="color:white">备注：</label>
+                        <div class="col-sm-6">
+                            <textarea class="form-control" id="remark" v-model="order.remark"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group text-center">
+                        <input type="button" value="预  约" class="btn btn-primary" v-on:click="addOrder">
+                        <input type="reset" value="取  消" class="btn btn-primary">
+                    </div>
+                </form>
+            </div>
+            <!--<div class="col-xs-12 footer text-center">
+                <div class="animate fadeInLeft">
+                    <p> &copy; 2016 Themes Industry,  All rights reserved. </p>
+                </div>
+            </div>-->
+        </div>
+    </div>
+</div>
+
+<!-- About -->
+<div id="aboutme" class="row section">
+    <div class="container career text-center">
+        <div class="row">
+            <div class="col-xs-12 text-center">
+                <div class="animate fadeInRight">
+                    <div class="heading">
+                        <h1>My Career Timeline</h1>
+                        <p>Maecenas biban lacus gravida placerat consequat Vivamus quis hendrerit mauris. Vestiblum laoreetfelis sed consectetur sollicitudin.</p>
+                    </div>
+                </div>
+                <div class="col-md-12 text-center">
+                    <div id="text-demo" class="owl-carousel">
+                        <div class="item text-center">
+                            <h2>Masters in Multimedia Design</h2>
+                            <em>University Of Oxford,<span> 2012-2013</span></em>
+                            <p> et venenatis massa tincidunt. Quisque a feuqiat metus. Praesent hendrerit iaculis lorem. Quisque a feuqiat metus. Praesent hendrerit iaculis lorem. Nullam nec velit iaculis, tincidunt felis nec lobortis elit. </p>
+                        </div>
+                        <div class="item text-center">
+                            <h2>Visual art & Design</h2>
+                            <em>Boston University,<span> 2013-2014</span></em>
+                            <p> et venenatis massa tincidunt. Quisque a feuqiat metus. Praesent hendrerit iaculis lorem. Quisque a feuqiat metus. Praesent hendrerit iaculis lorem. Nullam nec velit iaculis, tincidunt felis nec lobortis elit. </p>
+                        </div>
+                        <div class="item text-center">
+                            <h2>Creative Programmer</h2>
+                            <em>Creative Coders,<span> 2014-2015</span></em>
+                            <p> et venenatis massa tincidunt. Quisque a feuqiat metus. Praesent hendrerit iaculis lorem. Quisque a feuqiat metus. Praesent hendrerit iaculis lorem. Nullam nec velit iaculis, tincidunt felis nec lobortis elit. </p>
+                        </div>
+                        <div class="item text-center">
+                            <h2>Software Developer</h2>
+                            <em>Subex,<span> 2015-2016</span></em>
+                            <p> et venenatis massa tincidunt. Quisque a feuqiat metus. Praesent hendrerit iaculis lorem. Quisque a feuqiat metus. Praesent hendrerit iaculis lorem. Nullam nec velit iaculis, tincidunt felis nec lobortis elit. </p>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-xs-12 skills text-center">
+                    <div class="animate fadeInRight">
+                        <div class="heading">
+                            <h1>My Awesome Skills</h1>
+                            <p>Maecenas bibendum lacus gravida placerat consequat. Vivamus quis hendrerit mauris. Vestibulum laoreet felis sed consectetur sollicitudin.</p>
+                        </div>
+                    </div>
+                    <div class="animate bounceInUp">
+                        <div class="circle">
+                            <div class="circle_detail">
+                                <div class="myStat" data-dimension="250" data-text="75%" data-fontsize="18" data-percent="75" data-fgcolor="#fff"></div>
+                                <h3>Adobe Photoshop</h3>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut</p>
+                            </div>
+                            <div class="circle_detail">
+                                <div class="myStat" data-dimension="250" data-text="90%" data-fontsize="18" data-percent="90" data-fgcolor="#fff"></div>
+                                <h3>Javascript</h3>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut</p>
+                            </div>
+                            <div class="circle_detail active">
+                                <div class="myStat" data-dimension="250" data-text="77%" data-fontsize="18" data-percent="77" data-fgcolor="#fff"></div>
+                                <h3>Photography</h3>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut</p>
+                            </div>
+                            <div class="circle_detail">
+                                <div class="myStat" data-dimension="250" data-text="65%" data-fontsize="18" data-percent="65" data-fgcolor="#fff"></div>
+                                <h3>WordPress</h3>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Work -->
+
+<div id="mywork" class="row section">
+    <div class="container-fluid work text-center">
+        <div class="row">
+            <div class="col-xs-12 text-center">
+                <div class="animate fadeInRight">
+                    <div class="head">
+                        <h1>My Recent Work</h1>
+                    </div>
+                </div>
+                <div class="col-xs-12 work_filter text-center">
+                    <div class="row">
+                        <div class="animate fadeInLeft">
+                            <ul class="breadcrumb">
+                                <li><a href="#." class="filter active" data-filter="all">All</a></li>
+                                <li><a href="#." class="filter" data-filter=".brand">Branding</a></li>
+                                <li><a href="#." class="filter" data-filter=".design">Design</a></li>
+                                <li><a href="#." class="filter" data-filter=".photography">Photography</a></li>
+                                <li><a href="#." class="filter" data-filter=".web">Web</a></li>
+                            </ul>
+                        </div>
+                        <div class="gallery">
+                            <div class="row">
+                                <div class="mix web">
+                                    <div class="mix_sec">
+                                        <div class="imageContainer">
+                                            <img class="sec" th:src="@{/images/work1.png}" th:alt="work">
+                                            <a class="overlayText fancybox" th:href="@{/images/work1.png}"  data-fancybox-group="gallery">
+                                            <h4> Photo Chelenge </h4>
+                                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.</p>
+                                        </a> </div>
+                                    </div>
+                                </div>
+                                <div class="mix brand">
+                                    <div class="mix_sec">
+                                        <div class="imageContainer">
+                                            <img class="sec" th:src="@{/images/work2.png}" th:alt="work">
+                                            <a class="overlayText fancybox" th:href="@{/images/work2.png}" data-fancybox-group="gallery">
+                                            <h4> Photo Chelenge </h4>
+                                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.</p>
+                                        </a> </div>
+                                    </div>
+                                </div>
+                                <div class="mix design">
+                                    <div class="mix_sec">
+                                        <div class="imageContainer">
+                                            <img class="sec" th:src="@{/images/work3.png}" th:alt="work">
+                                            <a class="overlayText fancybox" th:href="@{/images/work3.png}"  data-fancybox-group="gallery">
+                                            <h4> Photo Chelenge </h4>
+                                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.</p>
+                                        </a> </div>
+                                    </div>
+                                </div>
+                                <div class="mix web">
+                                    <div class="mix_sec">
+                                        <div class="imageContainer">
+                                            <img class="sec" th:src="@{/images/work4.png}" th:alt="work">
+                                            <a class="overlayText fancybox" th:href="@{/images/work4.png}" data-fancybox-group="gallery">
+                                            <h4> Photo Chelenge </h4>
+                                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.</p>
+                                        </a> </div>
+                                    </div>
+                                </div>
+                                <div class="mix brand">
+                                    <div class="mix_sec">
+                                        <div class="imageContainer">
+                                            <img class="sec" th:src="@{/images/work5.png}" th:alt="work">
+                                            <a class="overlayText fancybox" th:href="@{/images/work5.png}"  data-fancybox-group="gallery">
+                                            <h4> Photo Chelenge </h4>
+                                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.</p>
+                                        </a> </div>
+                                    </div>
+                                </div>
+                                <div class="mix web">
+                                    <div class="mix_sec">
+                                        <div class="imageContainer">
+                                            <img class="sec" th:src="@{/images/work2.png}" th:alt="work">
+                                            <a class="overlayText fancybox" th:href="@{/images/work2.png}"  data-fancybox-group="gallery">
+                                            <h4> Photo Chelenge </h4>
+                                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.</p>
+                                        </a> </div>
+                                    </div>
+                                </div>
+                                <div class="mix photography">
+                                    <div class="mix_sec">
+                                        <div class="imageContainer">
+                                            <img class="sec" th:src="@{/images/work4.png}" th:alt="work">
+                                            <a class="overlayText fancybox" th:href="@{/images/work4.png}" data-fancybox-group="gallery">
+                                            <h4> Photo Chelenge </h4>
+                                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.</p>
+                                        </a> </div>
+                                    </div>
+                                </div>
+                                <div class="mix photography">
+                                    <div class="mix_sec">
+                                        <div class="imageContainer">
+                                            <img class="sec" th:src="@{/images/work5.png}" th:alt="work">
+                                            <a class="overlayText fancybox" th:href="@{/images/work5.png}"  data-fancybox-group="gallery">
+                                            <h4> Photo Chelenge </h4>
+                                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.</p>
+                                        </a> </div>
+                                    </div>
+                                </div>
+                                <div class="mix design">
+                                    <div class="mix_sec">
+                                        <div class="imageContainer">
+                                            <img class="sec" th:src="@{/images/work1.png}" th:alt="work">
+                                            <a class="overlayText fancybox" th:href="@{/images/work1.png}"  data-fancybox-group="gallery">
+                                            <h4> Photo Chelenge </h4>
+                                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.</p>
+                                        </a> </div>
+                                    </div>
+                                </div>
+                                <div class="mix photography">
+                                    <div class="mix_sec">
+                                        <div class="imageContainer">
+                                            <img class="sec" th:src="@{/images/work3.png}" th:alt="work">
+                                            <a class="overlayText fancybox" th:href="@{/images/work3.png}"  data-fancybox-group="gallery">
+                                            <h4> Photo Chelenge </h4>
+                                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. </p>
+                                        </a> </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 title text-center">
+                    <div class="animate fadeInRight">
+                        <h1>Are You Ready to Start Your Project Now?</h1>
+                        <div class="getin"> <a class="scroll" href="#contactme" data-target="contactme">Get In Touch</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<a href="#." class="cd-top">TOP</a>
+
+<!--JS File-->
+<script th:src="@{/js/jquery.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/jquery.circliful.min.js}"></script>
+<script th:src="@{/js/jquery.mixitup.min.js}"></script>
+<script th:src="@{/js/jquery.fancybox.js}"></script>
+<script th:src="@{/js/waypoints.js}"></script>
+<script th:src="@{/js/jquery.appear.js}"></script>
+<script th:src="@{/js/jpushmenu.js}"></script>
+<script th:src="@{/js/owl.carousel.js}"></script>
+<script th:src="@{/js/functions.js}"></script>
+<script th:src="@{/js/vue.min.js}"></script>
+<script th:src="@{/js/axios.min.js}"></script>
+
+<script>
+
+    /**
+     * 1、数据初始化在 created阶段
+     * 2、预约时间采用select联动 计算属性
+     */
+    window.onload=function(){
+        let vm=new Vue({
+            el:'#reserve',
+            data:{
+                orders: [],
+                order:{},
+                nowIndex:-1 //当前要删除项的索引
+            },
+            computed: { //计算属性
+
+            },
+            methods:{
+                addOrder(){
+                    this.orders.push(this.order);
+                    this.user={};
+                },
+                deleteUser(){
+                    if(this.nowIndex===-1){ //删除所有
+                        this.orders=[];
+                    }else{
+                        this.orders.splice(this.nowIndex,1); //从指定索引位置开始删除，删除一个
+                    }
+                }
+            },
+            created:function(){ // 用于初始化数据
+                alert('组件实例刚刚创建，还未进行数据观测和事件配置');
+                // this.queryList1();
+                // this.queryList2();
+                // this.queryList3();
+            }
+        });
+    }
+</script>
+
+</body>
+</html>
