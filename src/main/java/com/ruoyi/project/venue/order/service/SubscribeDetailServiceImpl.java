@@ -16,7 +16,9 @@ import com.ruoyi.common.utils.CommonUtil;
 import com.ruoyi.common.utils.DateUtil;
 import com.ruoyi.common.utils.TimeUtil;
 import com.ruoyi.framework.config.RuoYiConfig;
+import com.ruoyi.project.venue.introduce.domain.StopDate;
 import com.ruoyi.project.venue.introduce.domain.Venue;
+import com.ruoyi.project.venue.introduce.mapper.StopDateMapper;
 import com.ruoyi.project.venue.introduce.mapper.VenueMapper;
 import com.ruoyi.project.venue.order.domain.Subscribe;
 import com.ruoyi.project.venue.order.domain.SubscribeDetail;
@@ -29,6 +31,8 @@ import com.ruoyi.project.venue.order.mapper.SubscribeMapper;
 public class SubscribeDetailServiceImpl implements ISubscribeDetailService{
 	@Autowired
 	private VenueMapper venueMapper;
+	@Autowired
+	private StopDateMapper stopDateMapper;
 	@Autowired
 	private SubscribeMapper subscribeMapper;
 	@Autowired
@@ -69,7 +73,12 @@ public class SubscribeDetailServiceImpl implements ISubscribeDetailService{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		for(int i=0;i<Integer.valueOf(maxDay);i++){		
+		for(int i=0;i<Integer.valueOf(maxDay);i++){	
+			if(isInStopDate(currentdt)){
+				// 获取下一天
+				currentdt = DateUtil.getNextDay(currentdt,1);
+				continue;
+			} 
 			int weekDay = TimeUtil.getWeekIntOfDate(currentdt);
 			if(groupBy.containsKey(weekDay)){
 				List<Subscribe> times = groupBy.get(weekDay);
@@ -99,7 +108,6 @@ public class SubscribeDetailServiceImpl implements ISubscribeDetailService{
 			
 			subscribeDetailMapper.insertBatchDetails(details);
 		}
-	
 		return;
 	}
 
@@ -138,5 +146,15 @@ public class SubscribeDetailServiceImpl implements ISubscribeDetailService{
 	@Override
 	public Date selectFromDtById(int subscribe_time_id) {
 		return subscribeDetailMapper.selectFromDtById(subscribe_time_id);
+	}
+	
+	private boolean isInStopDate(Date date){
+		List<StopDate> list = stopDateMapper.selectValidStopDateList();
+		for(StopDate item:list){
+			if(item.getStopdate() == date){
+				return true;
+			}
+		}
+		return false;
 	}
 }

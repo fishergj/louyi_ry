@@ -20,6 +20,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		order by stopdate desc
     </select>
 
+	 <select id="selectValidStopDateList" resultType="StopDate">
+	       select
+	       		id,
+				stopdate       
+			from t_stopdate
+			where date_format(stopdate,'%y%m%d') &gt;= date_format(#{params.beginTime},'%y%m%d')			
+			order by stopdate desc
+	    </select>
+	
 
     <insert id="insertStopDate" parameterType="StopDate">
         insert into t_stopdate (
@@ -39,5 +48,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             #{id}
         </foreach>
     </delete>
+    
     
 </mapper>

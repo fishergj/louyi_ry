@@ -152,10 +152,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          where Id = #{id}
     </update>
 
-	<update id="cancelReserveByWno">
+	<update id="cancelReserveById">
 		update t_order
 		set
-		status='2'
+			status='2',
+			update_time = sysdate()
 		where id=#{id}
 	</update>
     

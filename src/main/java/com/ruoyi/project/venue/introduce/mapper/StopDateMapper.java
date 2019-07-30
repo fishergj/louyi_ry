@@ -11,7 +11,6 @@ import com.ruoyi.project.venue.introduce.domain.StopDate;
  * @date Dec 14, 2018 2:03:15 PM
  */
 public interface StopDateMapper {
-
 	/**
 	 * 查询禁用时间列表
 	 * 
@@ -21,7 +20,11 @@ public interface StopDateMapper {
 	 */
 	public List<StopDate> selectStopDateList(StopDate stopDate);
 	
-
+	/**
+	 * 获取当前时间有效禁用时间段
+	 * @return
+	 */
+	public List<StopDate>  selectValidStopDateList();
 	/**
 	 * 新增禁用时间
 	 * 

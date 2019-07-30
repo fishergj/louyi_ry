@@ -137,10 +137,16 @@ public class WechatReserveController extends BaseController {
         return ajaxResult;
     }
 
-    @GetMapping("/reserve_cancel")
-    public AjaxResult reserve_cancel(@PathVariable("id") int id) {
+    @PostMapping("/reserve_cancel")
+    @ResponseBody
+    public AjaxResult reserve_cancel(int id) {
         int ret = orderService.cancelReserveById(id);
-        return new AjaxResult(AjaxResult.Type.SUCCESS, "预约取消成功！");
+        if(ret == 1){
+        	 return new AjaxResult(AjaxResult.Type.SUCCESS, "预约取消成功！");
+        }else{
+        	 return new AjaxResult(AjaxResult.Type.WARN, "预约取消失败！");
+        }
+       
     }
 
     @GetMapping("/msg")

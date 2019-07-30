@@ -35,7 +35,13 @@
         </div>
         <div class="weui-panel__ft" th:if="${orderVo.status=='1' || orderVo.status=='4' || orderVo.status=='5'}">
             <div class="weui-cell weui-cell_access weui-cell_link oder-opt-btnbox">
-                <a href="cancel(this)" class="ords-btn-dele">取消预约</a>
+              <!--  <a href="cancel('this)" class="ords-btn-dele">取消预约</a> --> 
+              <a class="ords-btn-dele" href="javascript:void(0)"  th:onclick="'javascript:cancel(\''+${orderVo.id}+'\')'">取消预约</a> 
+            </div>
+        </div>
+         <div class="weui-panel__ft" th:if="${orderVo.status=='2'}">
+            <div class="weui-cell weui-cell_access weui-cell_link oder-opt-btnbox">
+              <a class="ords-btn-dele " href="javascript:location.href='/wechat/reserve'">重新申请</a> 
             </div>
         </div>
     </div>
@@ -44,36 +50,27 @@
 
 <script th:src="@{/js/jquery.min.js}"></script>
 <script th:src="@{/ajax/libs/jQuery-WeUI/jquery-weui.min.js}"></script>
-
-<!--<script type="text/javascript" src="js/jquery.Spinner.js"></script>-->
 <script>
-    /*$(document).ready(function(){
-        $.ajax({
-            type: "POST",
-            url: "/wechat/reserve_list",
-            dataType: "json",
-            success: function (data) {
-                if (data.code === -1) {
-                    $.toptip(data.msg, 'error');
-                } else if (data.code === 0) {
-                    $.toptip(data.msg, 'success');
-                }
-            }
-        });
-    });*/
-
-    function cancel(orderVo) {
-        alert(orderVo.id);
-        $.ajax({
-            url:"/wechat/reserve_cancel?id=" + id,
-            type:'post',
-            success:function(data){
-                if (data.code === 0) {
-                    $.toptip(data.msg, 'success');
-                    setTimeout("javascript:location.href='/wechat/reserve_list'", 3000);
-                }
-            }
-        });
+    function cancel(id) {
+    	 $.confirm("您确定取消此预约信息吗?", "确认取消?", function() {
+    		 $.ajax({
+    	            url:"/wechat/reserve_cancel",
+    	            type:'post',
+    	            data:{"id":id},
+    	            dataType: "json",
+    	            success:function(data){
+    	                if (data.code === 0) {
+    	                	 $.toast(data.msg);
+    	                	 //$.alert(data.msg);
+    	                    setTimeout("javascript:location.href='/wechat/reserve_list'", 3000);
+    	                }else{
+    	                	 $.alert(data.msg);
+    	                }
+    	            }
+    	        });
+           }, function() {});//取消操作
+    	
+       
     }
 </script>
 </body>

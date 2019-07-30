@@ -18,5 +18,10 @@ public interface ISubscribeDetailService {
 	 */
 	List<SubscribeTime> getInvalidDateList(int guestNum,Date fromDt,boolean isTypeIngore);
 
+	/**
+	 * 获取明细数据
+	 * @param subscribe_time_id
+	 * @return
+	 */
 	Date selectFromDtById(int subscribe_time_id);
 }
