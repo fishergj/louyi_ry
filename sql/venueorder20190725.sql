@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80016
 File Encoding         : 65001
 
-Date: 2019-07-25 22:15:41
+Date: 2019-07-30 13:35:31
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -163,7 +163,7 @@ CREATE TABLE `qrtz_scheduler_state` (
 -- ----------------------------
 -- Records of qrtz_scheduler_state
 -- ----------------------------
-INSERT INTO `qrtz_scheduler_state` VALUES ('RuoyiScheduler', 'DESKTOP-O7JRS8C1564063896865', '1564064022889', '15000');
+INSERT INTO `qrtz_scheduler_state` VALUES ('RuoyiScheduler', 'DESKTOP-O7JRS8C1564464807483', '1564464919351', '15000');
 
 -- ----------------------------
 -- Table structure for qrtz_simple_triggers
@@ -240,9 +240,9 @@ CREATE TABLE `qrtz_triggers` (
 -- ----------------------------
 -- Records of qrtz_triggers
 -- ----------------------------
-INSERT INTO `qrtz_triggers` VALUES ('RuoyiScheduler', 'TASK_CLASS_NAME1', 'DEFAULT', 'TASK_CLASS_NAME1', 'DEFAULT', null, '1564063900000', '-1', '5', 'PAUSED', 'CRON', '1564063897000', '0', null, '2', '');
-INSERT INTO `qrtz_triggers` VALUES ('RuoyiScheduler', 'TASK_CLASS_NAME2', 'DEFAULT', 'TASK_CLASS_NAME2', 'DEFAULT', null, '1564063905000', '-1', '5', 'PAUSED', 'CRON', '1564063898000', '0', null, '2', '');
-INSERT INTO `qrtz_triggers` VALUES ('RuoyiScheduler', 'TASK_CLASS_NAME3', 'DEFAULT', 'TASK_CLASS_NAME3', 'DEFAULT', null, '1564063900000', '-1', '5', 'PAUSED', 'CRON', '1564063898000', '0', null, '2', '');
+INSERT INTO `qrtz_triggers` VALUES ('RuoyiScheduler', 'TASK_CLASS_NAME1', 'DEFAULT', 'TASK_CLASS_NAME1', 'DEFAULT', null, '1564464810000', '-1', '5', 'PAUSED', 'CRON', '1564464808000', '0', null, '2', '');
+INSERT INTO `qrtz_triggers` VALUES ('RuoyiScheduler', 'TASK_CLASS_NAME2', 'DEFAULT', 'TASK_CLASS_NAME2', 'DEFAULT', null, '1564464810000', '-1', '5', 'PAUSED', 'CRON', '1564464808000', '0', null, '2', '');
+INSERT INTO `qrtz_triggers` VALUES ('RuoyiScheduler', 'TASK_CLASS_NAME3', 'DEFAULT', 'TASK_CLASS_NAME3', 'DEFAULT', null, '1564464820000', '-1', '5', 'PAUSED', 'CRON', '1564464809000', '0', null, '2', '');
 
 -- ----------------------------
 -- Table structure for sys_config
@@ -469,7 +469,7 @@ CREATE TABLE `sys_logininfor` (
   `msg` varchar(255) COLLATE utf8_bin DEFAULT '' COMMENT '提示消息',
   `login_time` datetime DEFAULT NULL COMMENT '访问时间',
   PRIMARY KEY (`info_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=258 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='系统访问记录';
+) ENGINE=InnoDB AUTO_INCREMENT=271 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='系统访问记录';
 
 -- ----------------------------
 -- Records of sys_logininfor
@@ -632,6 +632,19 @@ INSERT INTO `sys_logininfor` VALUES ('254', 'admin', '127.0.0.1', '内网IP', 'C
 INSERT INTO `sys_logininfor` VALUES ('255', 'jdkpg1', '127.0.0.1', '内网IP', 'Chrome', 'Windows 10', '0', '登录成功', '2019-07-25 21:36:12');
 INSERT INTO `sys_logininfor` VALUES ('256', 'jdkpg1', '127.0.0.1', '内网IP', 'Chrome', 'Windows 10', '0', '退出成功', '2019-07-25 21:44:37');
 INSERT INTO `sys_logininfor` VALUES ('257', 'admin', '127.0.0.1', '内网IP', 'Chrome', 'Windows 10', '0', '登录成功', '2019-07-25 22:12:19');
+INSERT INTO `sys_logininfor` VALUES ('258', 'admin', '127.0.0.1', '内网IP', 'Chrome', 'Windows 10', '1', '密码输入错误1次', '2019-07-26 13:01:23');
+INSERT INTO `sys_logininfor` VALUES ('259', 'admin', '127.0.0.1', '内网IP', 'Chrome', 'Windows 10', '0', '登录成功', '2019-07-26 13:01:30');
+INSERT INTO `sys_logininfor` VALUES ('260', 'admin', '127.0.0.1', '内网IP', 'Chrome', 'Windows 10', '0', '登录成功', '2019-07-26 13:17:44');
+INSERT INTO `sys_logininfor` VALUES ('261', 'admin', '127.0.0.1', '内网IP', 'Chrome', 'Windows 10', '1', '密码输入错误1次', '2019-07-30 13:16:38');
+INSERT INTO `sys_logininfor` VALUES ('262', 'admin', '127.0.0.1', '内网IP', 'Chrome', 'Windows 10', '0', '登录成功', '2019-07-30 13:16:45');
+INSERT INTO `sys_logininfor` VALUES ('263', 'admin', '127.0.0.1', '内网IP', 'Chrome', 'Windows 10', '0', '退出成功', '2019-07-30 13:21:06');
+INSERT INTO `sys_logininfor` VALUES ('264', 'admin', '127.0.0.1', '内网IP', 'Chrome', 'Windows 10', '0', '登录成功', '2019-07-30 13:21:08');
+INSERT INTO `sys_logininfor` VALUES ('265', 'admin', '127.0.0.1', '内网IP', 'Chrome', 'Windows 10', '0', '登录成功', '2019-07-30 13:27:46');
+INSERT INTO `sys_logininfor` VALUES ('266', 'admin', '127.0.0.1', '内网IP', 'Chrome', 'Windows 10', '0', '登录成功', '2019-07-30 13:33:51');
+INSERT INTO `sys_logininfor` VALUES ('267', 'admin', '127.0.0.1', '内网IP', 'Chrome', 'Windows 10', '0', '退出成功', '2019-07-30 13:34:20');
+INSERT INTO `sys_logininfor` VALUES ('268', 'jdkpg1', '127.0.0.1', '内网IP', 'Chrome', 'Windows 10', '1', '密码输入错误1次', '2019-07-30 13:34:39');
+INSERT INTO `sys_logininfor` VALUES ('269', 'jdkpg1', '127.0.0.1', '内网IP', 'Chrome', 'Windows 10', '0', '登录成功', '2019-07-30 13:34:48');
+INSERT INTO `sys_logininfor` VALUES ('270', 'jdkpg1', '127.0.0.1', '内网IP', 'Chrome', 'Windows 10', '0', '退出成功', '2019-07-30 13:35:06');
 
 -- ----------------------------
 -- Table structure for sys_menu
@@ -654,7 +667,7 @@ CREATE TABLE `sys_menu` (
   `update_time` datetime DEFAULT NULL COMMENT '更新时间',
   `remark` varchar(500) COLLATE utf8_bin DEFAULT '' COMMENT '备注',
   PRIMARY KEY (`menu_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2018 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='菜单权限表';
+) ENGINE=InnoDB AUTO_INCREMENT=2022 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='菜单权限表';
 
 -- ----------------------------
 -- Records of sys_menu
@@ -740,7 +753,7 @@ INSERT INTO `sys_menu` VALUES ('1056', '生成查询', '114', '1', '#', '', 'F',
 INSERT INTO `sys_menu` VALUES ('1057', '生成修改', '114', '2', '#', '', 'F', '0', 'tool:gen:edit', '#', 'admin', '2018-03-16 11:33:00', 'ry', '2018-03-16 11:33:00', '');
 INSERT INTO `sys_menu` VALUES ('1058', '生成删除', '114', '3', '#', '', 'F', '0', 'tool:gen:remove', '#', 'admin', '2018-03-16 11:33:00', 'ry', '2018-03-16 11:33:00', '');
 INSERT INTO `sys_menu` VALUES ('1059', '生成代码', '114', '4', '#', '', 'F', '0', 'tool:gen:code', '#', 'admin', '2018-03-16 11:33:00', 'ry', '2018-03-16 11:33:00', '');
-INSERT INTO `sys_menu` VALUES ('2000', '场馆管理', '0', '0', '#', 'menuItem', 'M', '0', '', 'fa fa-bank', 'admin', '2019-07-17 22:19:20', 'admin', '2019-07-17 22:19:35', '');
+INSERT INTO `sys_menu` VALUES ('2000', '信息管理', '0', '0', '#', 'menuItem', 'M', '0', '', 'fa fa-bank', 'admin', '2019-07-17 22:19:20', 'admin', '2019-07-30 13:17:07', '');
 INSERT INTO `sys_menu` VALUES ('2001', '场馆介绍', '2000', '1', '/venue/introduce', 'menuItem', 'C', '0', 'venue:introduce:view', '#', 'admin', '2019-07-17 22:23:30', 'admin', '2019-07-20 12:30:33', '');
 INSERT INTO `sys_menu` VALUES ('2002', '预约管理', '0', '10', '#', 'menuItem', 'M', '0', '', 'fa fa-address-book-o', 'admin', '2019-07-18 18:00:56', 'admin', '2019-07-18 18:01:20', '');
 INSERT INTO `sys_menu` VALUES ('2003', '预约审核', '2002', '1', '/venue/orderaudit', 'menuItem', 'C', '0', 'venue:orderaudit:view', '#', 'admin', '2019-07-18 18:02:04', 'admin', '2019-07-20 12:31:57', '');
@@ -756,6 +769,10 @@ INSERT INTO `sys_menu` VALUES ('2014', '驳回', '2003', '3', '#', 'menuItem', '
 INSERT INTO `sys_menu` VALUES ('2015', '更改时间', '2003', '4', '#', 'menuItem', 'F', '0', 'venue:orderaudit:editTime', '#', 'admin', '2019-07-20 12:47:02', '', null, '');
 INSERT INTO `sys_menu` VALUES ('2016', '在线查询', '2004', '1', '#', 'menuItem', 'F', '0', 'venue:orderstastics:list', '#', 'admin', '2019-07-20 21:15:56', '', null, '');
 INSERT INTO `sys_menu` VALUES ('2017', '在线查询', '2005', '1', '#', 'menuItem', 'F', '0', 'venue:orderhisstastics:list', '#', 'admin', '2019-07-22 19:21:51', '', null, '');
+INSERT INTO `sys_menu` VALUES ('2018', '禁止预约日期设置', '2000', '2', '/venue/stopdate', 'menuItem', 'C', '0', 'venue:stopdate:view', '#', 'admin', '2019-07-30 13:18:30', '', null, '');
+INSERT INTO `sys_menu` VALUES ('2019', '查询', '2018', '1', '#', 'menuItem', 'F', '0', 'venue:stopdate:list', '#', 'admin', '2019-07-30 13:19:32', '', null, '');
+INSERT INTO `sys_menu` VALUES ('2020', '新增', '2018', '2', '#', 'menuItem', 'F', '0', 'venue:stopdate:add', '#', 'admin', '2019-07-30 13:20:10', 'admin', '2019-07-30 13:20:30', '');
+INSERT INTO `sys_menu` VALUES ('2021', '删除', '2018', '3', '#', 'menuItem', 'F', '0', 'venue:stopdate:remove', '#', 'admin', '2019-07-30 13:20:48', '', null, '');
 
 -- ----------------------------
 -- Table structure for sys_notice
@@ -801,7 +818,7 @@ CREATE TABLE `sys_oper_log` (
   `error_msg` varchar(2000) COLLATE utf8_bin DEFAULT '' COMMENT '错误消息',
   `oper_time` datetime DEFAULT NULL COMMENT '操作时间',
   PRIMARY KEY (`oper_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=210 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='操作日志记录';
+) ENGINE=InnoDB AUTO_INCREMENT=230 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='操作日志记录';
 
 -- ----------------------------
 -- Records of sys_oper_log
@@ -916,6 +933,26 @@ INSERT INTO `sys_oper_log` VALUES ('206', '通知场馆介绍', '2', 'com.ruoyi.
 INSERT INTO `sys_oper_log` VALUES ('207', '通知场馆介绍', '2', 'com.ruoyi.project.venue.introduce.controller.IntroduceController.editSave()', '1', 'jdkpg1', 'IT运维部门', '/venue/introduce/edit', '127.0.0.1', '内网IP', '{\"id\":[\"25\"],\"venueId\":[\"1\"],\"introduceType\":[\"4\"],\"title\":[\"精彩瞬间\"],\"content\":[\"<p>4777777777777777777777777dddddddd</p><p>带来了绿绿绿绿绿绿绿绿</p><p>龙东大道多多多多多多多</p><p>打卡记录了</p><p>打卡机</p><p>李经理；lldkl</p><p><br></p>\"]}', '0', null, '2019-07-25 21:38:08');
 INSERT INTO `sys_oper_log` VALUES ('208', '通知场馆介绍', '2', 'com.ruoyi.project.venue.introduce.controller.IntroduceController.editSave()', '1', 'jdkpg1', 'IT运维部门', '/venue/introduce/edit', '127.0.0.1', '内网IP', '{\"id\":[\"26\"],\"venueId\":[\"1\"],\"introduceType\":[\"2\"],\"title\":[\"场馆导览\"],\"content\":[\"<p>wwwww</p>\"]}', '0', null, '2019-07-25 21:38:19');
 INSERT INTO `sys_oper_log` VALUES ('209', '通知场馆介绍', '2', 'com.ruoyi.project.venue.introduce.controller.IntroduceController.editSave()', '1', 'jdkpg1', 'IT运维部门', '/venue/introduce/edit', '127.0.0.1', '内网IP', '{\"id\":[\"28\"],\"venueId\":[\"1\"],\"introduceType\":[\"1\"],\"title\":[\"场馆概述\"],\"content\":[\"<p>4444444444444第三方发</p><p>但是房价快速减肥看见对方sldjf</p><p>贷款放款时间放得开了禄口街道弗兰克s</p><p>大嫁风尚</p><p>的刷卡缴费是</p>\"]}', '0', null, '2019-07-25 21:38:34');
+INSERT INTO `sys_oper_log` VALUES ('210', '更改预约时间', '2', 'com.ruoyi.project.venue.order.controller.OrderAuditController.editTime()', '1', 'admin', '研发部门', '/venue/orderaudit/editTime', '127.0.0.1', '内网IP', '{\"id\":[\"137\"],\"name\":[\"高军3\"],\"w_no\":[\"fisher4\"],\"telephone\":[\"18761717979\"],\"introduceType\":[\"1\",\"1\"],\"adult\":[\"6\"],\"child\":[\"1\"],\"inputTimeFmt\":[\"2019-07-18 10:30\"],\"venueName\":[\"嘉定气象科普馆\"],\"remark\":[\"\"],\"subscribe_time_id\":[\"81\"],\"alter_reason\":[\"\"]}', '1', '\r\n### Error querying database.  Cause: java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near \'\' at line 5\r\n### The error may exist in file [D:\\ruoyi\\louyi_ry\\target\\classes\\mybatis\\venue\\order\\OrderMapper.xml]\r\n### The error may involve com.ruoyi.project.venue.order.mapper.OrderMapper.selectSubscribePerson-Inline\r\n### The error occurred while setting parameters\r\n### SQL: SELECT     sum(subscribe_num) totalPerson   FROM     t_order   WHERE subscribe_time_id = #(subscribe_time_id)\r\n### Cause: java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near \'\' at line 5\n; bad SQL grammar []; nested exception is java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near \'\' at line 5', '2019-07-26 13:01:48');
+INSERT INTO `sys_oper_log` VALUES ('211', '更改预约时间', '2', 'com.ruoyi.project.venue.order.controller.OrderAuditController.editTime()', '1', 'admin', null, '/venue/orderaudit/editTime', '127.0.0.1', '内网IP', '{\"id\":[\"137\"],\"name\":[\"高军3\"],\"w_no\":[\"fisher4\"],\"telephone\":[\"18761717979\"],\"introduceType\":[\"1\",\"1\"],\"adult\":[\"6\"],\"child\":[\"1\"],\"inputTimeFmt\":[\"2019-07-18 10:30\"],\"venueName\":[\"嘉定气象科普馆\"],\"remark\":[\"\"],\"subscribe_time_id\":[\"73\"],\"alter_reason\":[\"\"]}', '1', '\r\n### Error querying database.  Cause: java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near \'\' at line 5\r\n### The error may exist in file [D:\\ruoyi\\louyi_ry\\target\\classes\\mybatis\\venue\\order\\OrderMapper.xml]\r\n### The error may involve com.ruoyi.project.venue.order.mapper.OrderMapper.selectSubscribePerson-Inline\r\n### The error occurred while setting parameters\r\n### SQL: SELECT     sum(subscribe_num) totalPerson   FROM     t_order   WHERE subscribe_time_id = #(subscribe_time_id)\r\n### Cause: java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near \'\' at line 5\n; bad SQL grammar []; nested exception is java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near \'\' at line 5', '2019-07-26 13:04:54');
+INSERT INTO `sys_oper_log` VALUES ('212', '更改预约时间', '2', 'com.ruoyi.project.venue.order.controller.OrderAuditController.editTime()', '1', 'admin', '研发部门', '/venue/orderaudit/editTime', '127.0.0.1', '内网IP', '{\"id\":[\"137\"],\"name\":[\"高军3\"],\"w_no\":[\"fisher4\"],\"telephone\":[\"18761717979\"],\"introduceType\":[\"1\",\"1\"],\"adult\":[\"6\"],\"child\":[\"1\"],\"inputTimeFmt\":[\"2019-07-18 10:30\"],\"venueName\":[\"嘉定气象科普馆\"],\"remark\":[\"\"],\"subscribe_time_id\":[\"74\"],\"alter_reason\":[\"\"]}', '1', '\r\n### Error querying database.  Cause: java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near \'\' at line 5\r\n### The error may exist in file [D:\\ruoyi\\louyi_ry\\target\\classes\\mybatis\\venue\\order\\OrderMapper.xml]\r\n### The error may involve com.ruoyi.project.venue.order.mapper.OrderMapper.selectSubscribePerson-Inline\r\n### The error occurred while setting parameters\r\n### SQL: SELECT       ifnull(sum(subscribe_num),0) totalPerson   FROM     t_order   WHERE subscribe_time_id = #(subscribe_time_id)\r\n### Cause: java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near \'\' at line 5\n; bad SQL grammar []; nested exception is java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near \'\' at line 5', '2019-07-26 13:18:36');
+INSERT INTO `sys_oper_log` VALUES ('213', '更改预约时间', '2', 'com.ruoyi.project.venue.order.controller.OrderAuditController.editTime()', '1', 'admin', null, '/venue/orderaudit/editTime', '127.0.0.1', '内网IP', '{\"id\":[\"137\"],\"name\":[\"高军3\"],\"w_no\":[\"fisher4\"],\"telephone\":[\"18761717979\"],\"introduceType\":[\"1\",\"1\"],\"adult\":[\"6\"],\"child\":[\"1\"],\"inputTimeFmt\":[\"2019-07-18 10:30\"],\"venueName\":[\"嘉定气象科普馆\"],\"remark\":[\"\"],\"subscribe_time_id\":[\"76\"],\"alter_reason\":[\"\"]}', '1', '\r\n### Error querying database.  Cause: java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near \'\' at line 5\r\n### The error may exist in file [D:\\ruoyi\\louyi_ry\\target\\classes\\mybatis\\venue\\order\\OrderMapper.xml]\r\n### The error may involve com.ruoyi.project.venue.order.mapper.OrderMapper.selectSubscribePerson-Inline\r\n### The error occurred while setting parameters\r\n### SQL: SELECT       ifnull(sum(subscribe_num),0) totalPerson   FROM     t_order   WHERE subscribe_time_id = #(subscribe_time_id)\r\n### Cause: java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near \'\' at line 5\n; bad SQL grammar []; nested exception is java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near \'\' at line 5', '2019-07-26 13:19:27');
+INSERT INTO `sys_oper_log` VALUES ('214', '更改预约时间', '2', 'com.ruoyi.project.venue.order.controller.OrderAuditController.editTime()', '1', 'admin', null, '/venue/orderaudit/editTime', '127.0.0.1', '内网IP', '{\"id\":[\"137\"],\"name\":[\"高军3\"],\"w_no\":[\"fisher4\"],\"telephone\":[\"18761717979\"],\"introduceType\":[\"1\",\"1\"],\"adult\":[\"6\"],\"child\":[\"1\"],\"inputTimeFmt\":[\"2019-07-18 10:30\"],\"venueName\":[\"嘉定气象科普馆\"],\"remark\":[\"\"],\"subscribe_time_id\":[\"61\"],\"alter_reason\":[\"\"]}', '1', '\r\n### Error querying database.  Cause: java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near \'\' at line 5\r\n### The error may exist in file [D:\\ruoyi\\louyi_ry\\target\\classes\\mybatis\\venue\\order\\OrderMapper.xml]\r\n### The error may involve com.ruoyi.project.venue.order.mapper.OrderMapper.selectSubscribePerson-Inline\r\n### The error occurred while setting parameters\r\n### SQL: SELECT       ifnull(sum(subscribe_num),0) totalPerson   FROM     t_order   WHERE subscribe_time_id = #(id)\r\n### Cause: java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near \'\' at line 5\n; bad SQL grammar []; nested exception is java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near \'\' at line 5', '2019-07-26 13:20:57');
+INSERT INTO `sys_oper_log` VALUES ('215', '更改预约时间', '2', 'com.ruoyi.project.venue.order.controller.OrderAuditController.editTime()', '1', 'admin', null, '/venue/orderaudit/editTime', '127.0.0.1', '内网IP', '{\"id\":[\"137\"],\"name\":[\"高军3\"],\"w_no\":[\"fisher4\"],\"telephone\":[\"18761717979\"],\"introduceType\":[\"1\",\"1\"],\"adult\":[\"6\"],\"child\":[\"1\"],\"inputTimeFmt\":[\"2019-07-18 10:30\"],\"venueName\":[\"嘉定气象科普馆\"],\"remark\":[\"\"],\"subscribe_time_id\":[\"76\"],\"alter_reason\":[\"\"]}', '0', null, '2019-07-26 13:22:38');
+INSERT INTO `sys_oper_log` VALUES ('216', '更改预约时间', '2', 'com.ruoyi.project.venue.order.controller.OrderAuditController.editTime()', '1', 'admin', null, '/venue/orderaudit/editTime', '127.0.0.1', '内网IP', '{\"id\":[\"138\"],\"name\":[\"金筱玲4\"],\"w_no\":[\"筱玲4\"],\"telephone\":[\"18761717979\"],\"introduceType\":[\"1\",\"1\"],\"adult\":[\"7\"],\"child\":[\"1\"],\"inputTimeFmt\":[\"2019-07-18 13:00\"],\"venueName\":[\"嘉定气象科普馆\"],\"remark\":[\"\"],\"subscribe_time_id\":[\"65\"],\"alter_reason\":[\"\"]}', '0', null, '2019-07-26 13:24:17');
+INSERT INTO `sys_oper_log` VALUES ('217', '更改预约时间', '2', 'com.ruoyi.project.venue.order.controller.OrderAuditController.editTime()', '1', 'admin', null, '/venue/orderaudit/editTime', '127.0.0.1', '内网IP', '{\"id\":[\"139\"],\"subscribe_num\":[\"9\"],\"name\":[\"高军4\"],\"w_no\":[\"fisher5\"],\"telephone\":[\"15950818624\"],\"introduceType\":[\"1\",\"1\"],\"adult\":[\"8\"],\"child\":[\"1\"],\"inputTimeFmt\":[\"2019-07-18 15:00\"],\"venueName\":[\"嘉定气象科普馆\"],\"remark\":[\"\"],\"subscribe_time_id\":[\"76\"],\"alter_reason\":[\"\"]}', '0', null, '2019-07-26 13:26:00');
+INSERT INTO `sys_oper_log` VALUES ('218', '菜单管理', '2', 'com.ruoyi.project.system.menu.controller.MenuController.editSave()', '1', 'admin', '研发部门', '/system/menu/edit', '127.0.0.1', '内网IP', '{\"menuId\":[\"2000\"],\"parentId\":[\"0\"],\"menuType\":[\"M\"],\"menuName\":[\"信息管理\"],\"url\":[\"#\"],\"target\":[\"menuItem\"],\"perms\":[\"\"],\"orderNum\":[\"0\"],\"icon\":[\"fa fa-bank\"],\"visible\":[\"0\"]}', '0', null, '2019-07-30 13:17:08');
+INSERT INTO `sys_oper_log` VALUES ('219', '菜单管理', '1', 'com.ruoyi.project.system.menu.controller.MenuController.addSave()', '1', 'admin', '研发部门', '/system/menu/add', '127.0.0.1', '内网IP', '{\"parentId\":[\"2000\"],\"menuType\":[\"C\"],\"menuName\":[\"禁止预约日期设置\"],\"url\":[\"/venue/stopdate\"],\"target\":[\"menuItem\"],\"perms\":[\"venue:stopdate:view\"],\"orderNum\":[\"2\"],\"icon\":[\"\"],\"visible\":[\"0\"]}', '0', null, '2019-07-30 13:18:30');
+INSERT INTO `sys_oper_log` VALUES ('220', '菜单管理', '1', 'com.ruoyi.project.system.menu.controller.MenuController.addSave()', '1', 'admin', '研发部门', '/system/menu/add', '127.0.0.1', '内网IP', '{\"parentId\":[\"2018\"],\"menuType\":[\"F\"],\"menuName\":[\"查询\"],\"url\":[\"\"],\"target\":[\"menuItem\"],\"perms\":[\"venue:stopdate:list\"],\"orderNum\":[\"1\"],\"icon\":[\"\"],\"visible\":[\"0\"]}', '0', null, '2019-07-30 13:19:32');
+INSERT INTO `sys_oper_log` VALUES ('221', '菜单管理', '1', 'com.ruoyi.project.system.menu.controller.MenuController.addSave()', '1', 'admin', '研发部门', '/system/menu/add', '127.0.0.1', '内网IP', '{\"parentId\":[\"2018\"],\"menuType\":[\"F\"],\"menuName\":[\"新增\"],\"url\":[\"\"],\"target\":[\"menuItem\"],\"perms\":[\"\"],\"orderNum\":[\"2\"],\"icon\":[\"\"],\"visible\":[\"0\"]}', '0', null, '2019-07-30 13:20:10');
+INSERT INTO `sys_oper_log` VALUES ('222', '菜单管理', '2', 'com.ruoyi.project.system.menu.controller.MenuController.editSave()', '1', 'admin', '研发部门', '/system/menu/edit', '127.0.0.1', '内网IP', '{\"menuId\":[\"2020\"],\"parentId\":[\"2018\"],\"menuType\":[\"F\"],\"menuName\":[\"新增\"],\"url\":[\"#\"],\"target\":[\"menuItem\"],\"perms\":[\"venue:stopdate:add\"],\"orderNum\":[\"2\"],\"icon\":[\"#\"],\"visible\":[\"0\"]}', '0', null, '2019-07-30 13:20:31');
+INSERT INTO `sys_oper_log` VALUES ('223', '菜单管理', '1', 'com.ruoyi.project.system.menu.controller.MenuController.addSave()', '1', 'admin', '研发部门', '/system/menu/add', '127.0.0.1', '内网IP', '{\"parentId\":[\"2018\"],\"menuType\":[\"F\"],\"menuName\":[\"删除\"],\"url\":[\"\"],\"target\":[\"menuItem\"],\"perms\":[\"venue:stopdate:remove\"],\"orderNum\":[\"3\"],\"icon\":[\"\"],\"visible\":[\"0\"]}', '0', null, '2019-07-30 13:20:48');
+INSERT INTO `sys_oper_log` VALUES ('224', '新增禁用日期', '1', 'com.ruoyi.project.venue.introduce.controller.StopDateController.addSave()', '1', 'admin', '研发部门', '/venue/stopdate/add', '127.0.0.1', '内网IP', '{\"stopdate\":[\"2019-07-30\"]}', '0', null, '2019-07-30 13:28:03');
+INSERT INTO `sys_oper_log` VALUES ('225', '删除禁用日期', '3', 'com.ruoyi.project.venue.introduce.controller.StopDateController.remove()', '1', 'admin', '研发部门', '/venue/stopdate/remove', '127.0.0.1', '内网IP', '{\"ids\":[\"0\"]}', '0', null, '2019-07-30 13:28:34');
+INSERT INTO `sys_oper_log` VALUES ('226', '新增禁用日期', '1', 'com.ruoyi.project.venue.introduce.controller.StopDateController.addSave()', '1', 'admin', null, '/venue/stopdate/add', '127.0.0.1', '内网IP', '{\"stopdate\":[\"2019-07-24\"]}', '0', null, '2019-07-30 13:29:53');
+INSERT INTO `sys_oper_log` VALUES ('227', '删除禁用日期', '3', 'com.ruoyi.project.venue.introduce.controller.StopDateController.remove()', '1', 'admin', null, '/venue/stopdate/remove', '127.0.0.1', '内网IP', '{\"ids\":[\"2\"]}', '0', null, '2019-07-30 13:29:58');
+INSERT INTO `sys_oper_log` VALUES ('228', '角色管理', '2', 'com.ruoyi.project.system.role.controller.RoleController.editSave()', '1', 'admin', '研发部门', '/system/role/edit', '127.0.0.1', '内网IP', '{\"roleId\":[\"100\"],\"roleName\":[\"科普馆运维人员角色\"],\"roleKey\":[\"yunwei\"],\"roleSort\":[\"3\"],\"status\":[\"0\"],\"remark\":[\"\"],\"menuIds\":[\"2000,2001,2006,2007,2009,2010,2018,2019,2020,2021,2002,2003,2011,2013,2014,2015,2004,2016,2005,2017\"]}', '0', null, '2019-07-30 13:34:16');
+INSERT INTO `sys_oper_log` VALUES ('229', '删除禁用日期', '3', 'com.ruoyi.project.venue.introduce.controller.StopDateController.remove()', '1', 'jdkpg1', 'IT运维部门', '/venue/stopdate/remove', '127.0.0.1', '内网IP', '{\"ids\":[\"1\"]}', '0', null, '2019-07-30 13:34:56');
 
 -- ----------------------------
 -- Table structure for sys_post
@@ -968,7 +1005,7 @@ CREATE TABLE `sys_role` (
 -- ----------------------------
 INSERT INTO `sys_role` VALUES ('1', '管理员', 'admin', '1', '1', '0', '0', 'admin', '2018-03-16 11:33:00', 'ry', '2018-03-16 11:33:00', '管理员');
 INSERT INTO `sys_role` VALUES ('2', '普通角色', 'common', '2', '2', '0', '0', 'admin', '2018-03-16 11:33:00', 'ry', '2018-03-16 11:33:00', '普通角色');
-INSERT INTO `sys_role` VALUES ('100', '科普馆运维人员角色', 'yunwei', '3', '1', '0', '0', 'admin', '2019-07-20 11:55:01', 'admin', '2019-07-22 19:22:29', '');
+INSERT INTO `sys_role` VALUES ('100', '科普馆运维人员角色', 'yunwei', '3', '1', '0', '0', 'admin', '2019-07-20 11:55:01', 'admin', '2019-07-30 13:34:15', '');
 
 -- ----------------------------
 -- Table structure for sys_role_dept
@@ -1097,6 +1134,10 @@ INSERT INTO `sys_role_menu` VALUES ('100', '2014');
 INSERT INTO `sys_role_menu` VALUES ('100', '2015');
 INSERT INTO `sys_role_menu` VALUES ('100', '2016');
 INSERT INTO `sys_role_menu` VALUES ('100', '2017');
+INSERT INTO `sys_role_menu` VALUES ('100', '2018');
+INSERT INTO `sys_role_menu` VALUES ('100', '2019');
+INSERT INTO `sys_role_menu` VALUES ('100', '2020');
+INSERT INTO `sys_role_menu` VALUES ('100', '2021');
 
 -- ----------------------------
 -- Table structure for sys_user
@@ -1129,9 +1170,9 @@ CREATE TABLE `sys_user` (
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES ('1', '103', 'admin', '系统管理员', '00', 'ry@163.com', '15888888888', '1', '/profile/avatar/2019/07/25/3394b981bc9cc16fc1f81f4f17755350.png', '4b6a32d237d37a0dbf7903b7b08b30e8', '520e9d', '0', '0', '127.0.0.1', '2019-07-25 22:12:20', 'admin', '2018-03-16 11:33:00', 'ry', '2019-07-25 22:12:19', '管理员');
+INSERT INTO `sys_user` VALUES ('1', '103', 'admin', '系统管理员', '00', 'ry@163.com', '15888888888', '1', '/profile/avatar/2019/07/25/3394b981bc9cc16fc1f81f4f17755350.png', '4b6a32d237d37a0dbf7903b7b08b30e8', '520e9d', '0', '0', '127.0.0.1', '2019-07-30 13:33:52', 'admin', '2018-03-16 11:33:00', 'ry', '2019-07-30 13:33:51', '管理员');
 INSERT INTO `sys_user` VALUES ('2', '105', 'ry', '若依', '00', 'ry@qq.com', '15666666666', '1', '', '8e6d98b90472783cc73c17047ddccf36', '222222', '0', '0', '127.0.0.1', '2018-03-16 11:33:00', 'admin', '2018-03-16 11:33:00', 'ry', '2018-03-16 11:33:00', '测试员');
-INSERT INTO `sys_user` VALUES ('100', '201', 'jdkpg1', '运维人员', '00', '532279502@qq.com', '18761717979', '0', '/profile/avatar/2019/07/25/6c1133883c16219b092293d4dd0ac07f.png', '1de44ea62e410462fccc6de5a01ef196', '6109a0', '0', '0', '127.0.0.1', '2019-07-25 21:36:12', 'admin', '2019-07-20 11:58:40', 'admin', '2019-07-25 21:36:12', '');
+INSERT INTO `sys_user` VALUES ('100', '201', 'jdkpg1', '运维人员', '00', '532279502@qq.com', '18761717979', '0', '/profile/avatar/2019/07/25/6c1133883c16219b092293d4dd0ac07f.png', '1de44ea62e410462fccc6de5a01ef196', '6109a0', '0', '0', '127.0.0.1', '2019-07-30 13:34:48', 'admin', '2019-07-20 11:58:40', 'admin', '2019-07-30 13:34:48', '');
 
 -- ----------------------------
 -- Table structure for sys_user_online
@@ -1155,7 +1196,6 @@ CREATE TABLE `sys_user_online` (
 -- ----------------------------
 -- Records of sys_user_online
 -- ----------------------------
-INSERT INTO `sys_user_online` VALUES ('bfae1596-74d8-4af0-a769-f16d2aed212e', 'admin', '研发部门', '127.0.0.1', '内网IP', 'Chrome', 'Windows 10', 'on_line', '2019-07-25 22:12:18', '2019-07-25 22:12:20', '1800000');
 
 -- ----------------------------
 -- Table structure for sys_user_post
@@ -1247,9 +1287,9 @@ INSERT INTO `t_order` VALUES ('2', '高军1', '15950818624', 'fisher2', '1', '1'
 INSERT INTO `t_order` VALUES ('3', '金筱玲2', '18761717979', '筱玲2', '3', '1', '4', '1', '69', '1', '', '2019-07-30 09:00:00', '4', null, '2019-07-25 19:30:14', '', '2019-07-17 13:00:00', '2019-07-25 19:30:14');
 INSERT INTO `t_order` VALUES ('4', '高军2', '15950818624', 'fisher3', '4', '1', '5', '1', '73', '1', '', '2019-07-31 09:00:00', '4', null, '2019-07-25 19:30:22', '', '2019-07-17 15:00:00', '2019-07-25 19:30:22');
 INSERT INTO `t_order` VALUES ('136', '金筱玲3', '15950818624', '筱玲3', '5', '1', '6', '1', '75', '1', '', '2019-07-31 13:00:00', '4', null, '2019-07-25 19:30:33', '', '2019-07-18 09:00:00', '2019-07-25 19:30:33');
-INSERT INTO `t_order` VALUES ('137', '高军3', '18761717979', 'fisher4', '6', '1', '7', '1', '30', '1', '', '2019-07-18 10:30:00', '1', null, null, null, '2019-07-18 10:30:00', '2019-07-18 10:30:00');
-INSERT INTO `t_order` VALUES ('138', '金筱玲4', '18761717979', '筱玲4', '7', '1', '8', '1', '31', '1', '', '2019-07-18 13:00:00', '1', null, null, null, '2019-07-18 13:00:00', '2019-07-18 13:00:00');
-INSERT INTO `t_order` VALUES ('139', '高军4', '15950818624', 'fisher5', '8', '1', '9', '1', '32', '1', '', '2019-07-18 15:00:00', '1', null, null, null, '2019-07-18 15:00:00', '2019-07-18 15:00:00');
+INSERT INTO `t_order` VALUES ('137', '高军3', '18761717979', 'fisher4', '6', '1', '7', '1', '76', '1', '', '2019-07-31 15:00:00', '4', null, '2019-07-26 13:22:38', '', '2019-07-18 10:30:00', '2019-07-26 13:22:38');
+INSERT INTO `t_order` VALUES ('138', '金筱玲4', '18761717979', '筱玲4', '7', '1', '8', '1', '65', '1', '', '2019-07-29 09:00:00', '4', null, '2019-07-26 13:24:17', '', '2019-07-18 13:00:00', '2019-07-26 13:24:17');
+INSERT INTO `t_order` VALUES ('139', '高军4', '15950818624', 'fisher5', '8', '1', '9', '1', '76', '1', '', '2019-07-31 15:00:00', '4', null, '2019-07-26 13:26:00', '', '2019-07-18 15:00:00', '2019-07-26 13:26:00');
 INSERT INTO `t_order` VALUES ('140', '金筱玲5', '18761717979', '筱玲5', '9', '1', '10', '2', '33', '1', '', '2019-07-19 09:00:00', '1', null, null, null, '2019-07-19 09:00:00', '2019-07-19 09:00:00');
 INSERT INTO `t_order` VALUES ('141', '高军5', '15950818624', 'fisher6', '10', '1', '11', '2', '34', '1', '', '2019-07-19 10:30:00', '1', null, null, null, '2019-07-19 10:30:00', '2019-07-19 10:30:00');
 INSERT INTO `t_order` VALUES ('142', '金筱玲6', '18761717979', '筱玲6', '1', '1', '2', '1', '35', '1', '', '2019-07-19 13:00:00', '1', null, null, null, '2019-07-19 13:00:00', '2019-07-19 13:00:00');
@@ -1266,6 +1306,22 @@ INSERT INTO `t_order` VALUES ('152', '金筱玲11', '18761717979', '筱玲11', '
 INSERT INTO `t_order` VALUES ('153', '高军11', '15950818624', 'fisher12', '1', '1', '2', '1', '46', '1', '', '2019-07-23 10:30:00', '1', null, null, null, '2019-07-23 10:30:00', '2019-07-23 10:30:00');
 INSERT INTO `t_order` VALUES ('154', '金筱玲12', '18761717979', '筱玲12', '3', '1', '4', '1', '47', '1', '', '2019-07-23 13:00:00', '1', null, null, null, '2019-07-23 13:00:00', '2019-07-23 13:00:00');
 INSERT INTO `t_order` VALUES ('155', '高军12', '15950818624', 'fisher', '5', '5', '10', '1', '51', '1', '', '2019-07-24 13:00:00', '4', null, null, null, '2019-07-18 19:13:45', '2019-07-20 17:03:19');
+
+-- ----------------------------
+-- Table structure for t_stopdate
+-- ----------------------------
+DROP TABLE IF EXISTS `t_stopdate`;
+CREATE TABLE `t_stopdate` (
+  `create_time` datetime DEFAULT NULL,
+  `stopdate` datetime DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `update_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- ----------------------------
+-- Records of t_stopdate
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for t_subscribe
@@ -1329,7 +1385,7 @@ CREATE TABLE `t_subscribe_detail` (
   `update_time` datetime DEFAULT NULL,
   `enabled` char(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=89 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=93 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_subscribe_detail
@@ -1398,6 +1454,10 @@ INSERT INTO `t_subscribe_detail` VALUES ('85', '6', '2019-08-03 00:00:00', '09:0
 INSERT INTO `t_subscribe_detail` VALUES ('86', '6', '2019-08-03 00:00:00', '10:30:00', '12:00:00', '0', '0', '1', '2019-07-25 07:01:17', '2019-07-25 07:01:17', '1');
 INSERT INTO `t_subscribe_detail` VALUES ('87', '6', '2019-08-03 00:00:00', '13:00:00', '14:30:00', '0', '0', '1', '2019-07-25 07:01:17', '2019-07-25 07:01:17', '1');
 INSERT INTO `t_subscribe_detail` VALUES ('88', '6', '2019-08-03 00:00:00', '15:00:00', '16:30:00', '0', '0', '1', '2019-07-25 07:01:17', '2019-07-25 07:01:17', '1');
+INSERT INTO `t_subscribe_detail` VALUES ('89', '1', '2019-08-05 00:00:00', '09:00:00', '10:30:00', '0', '1', '1', '2019-07-30 13:15:06', '2019-07-30 13:15:06', '1');
+INSERT INTO `t_subscribe_detail` VALUES ('90', '1', '2019-08-05 00:00:00', '10:30:00', '12:00:00', '0', '1', '1', '2019-07-30 13:15:06', '2019-07-30 13:15:06', '1');
+INSERT INTO `t_subscribe_detail` VALUES ('91', '1', '2019-08-05 00:00:00', '13:00:00', '14:30:00', '0', '1', '1', '2019-07-30 13:15:06', '2019-07-30 13:15:06', '1');
+INSERT INTO `t_subscribe_detail` VALUES ('92', '1', '2019-08-05 00:00:00', '15:00:00', '16:30:00', '0', '1', '1', '2019-07-30 13:15:06', '2019-07-30 13:15:06', '1');
 
 -- ----------------------------
 -- Table structure for t_traffic

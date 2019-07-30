@@ -101,5 +101,5 @@ public interface OrderMapper {
 
     List<OrderVo> getNormalOrderVoByWno(String w_no);
 
-	int cancelReserveByWno(@Param("w_no") String w_no);
+	int cancelReserveById(@Param("id") int id);
 }

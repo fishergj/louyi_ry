@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link th:href="@{/ajax/libs/jQuery-WeUI/weui.min.css}" rel="stylesheet">
+    <link th:href="@{/ajax/libs/jQuery-WeUI/jquery-weui.min.css}" rel="stylesheet">
+    <link th:href="@{/css/style2.css}" rel="stylesheet">
+    <link th:href="@{/ajax/libs/jQuery-WeUI/demos.css}" rel="stylesheet">
+
+    <title>预约查看</title>
+</head>
+<body ontouchstart>
+<header class='demos-header'>
+    <h1 class="demos-title">预约信息一览</h1>
+</header>
+
+<div class="weui-tab__bd-item">
+    <div class="weui-panel weui-panel_access" th:each="orderVo : ${orderVos}">
+        <div class="weui-panel__hd">预约编号：<span th:text="${orderVo.id}"></span><span class="ord-status-txt-ts fr" th:text="${orderVo.status_text}"></span></div>
+        <div class="weui-media-box__bd  pd-10">
+            <div class="weui-media-box_appmsg ord-pro-list">
+                <div class="weui-media-box__bd">
+                    <p class="weui-media-box__desc" style="font-size: medium">预约人姓名：<span th:text="${orderVo.name}"></span></p>
+                    <p class="weui-media-box__desc" style="font-size: medium">手 机 号 码：<span th:text="${orderVo.telephone}"></span></p>
+                    <p class="weui-media-box__desc" style="font-size: medium">预 约 场 馆：<span th:text="${orderVo.venue_text}"></span></p>
+                    <div class="clear mg-t-10">
+                        <div class="wy-pro-pri fl" style="font-size: large">参观时间：<span style="font-size: large" th:text="${orderVo.date_format}"></span></div>
+                        <div class="pro-amount fr"><span class="font-13">人数×<em class="name"><span th:text="${orderVo.subscribe_num}"></span></em></span></div>
+                    </div>
+                    <input type="hidden" id="w_no" value="[[${orderVo.status}]]">
+                </div>
+            </div>
+        </div>
+        <div class="weui-panel__ft" th:if="${orderVo.status=='1' || orderVo.status=='4' || orderVo.status=='5'}">
+            <div class="weui-cell weui-cell_access weui-cell_link oder-opt-btnbox">
+                <a href="cancel(this)" class="ords-btn-dele">取消预约</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script th:src="@{/js/jquery.min.js}"></script>
+<script th:src="@{/ajax/libs/jQuery-WeUI/jquery-weui.min.js}"></script>
+
+<!--<script type="text/javascript" src="js/jquery.Spinner.js"></script>-->
+<script>
+    /*$(document).ready(function(){
+        $.ajax({
+            type: "POST",
+            url: "/wechat/reserve_list",
+            dataType: "json",
+            success: function (data) {
+                if (data.code === -1) {
+                    $.toptip(data.msg, 'error');
+                } else if (data.code === 0) {
+                    $.toptip(data.msg, 'success');
+                }
+            }
+        });
+    });*/
+
+    function cancel(orderVo) {
+        alert(orderVo.id);
+        $.ajax({
+            url:"/wechat/reserve_cancel?id=" + id,
+            type:'post',
+            success:function(data){
+                if (data.code === 0) {
+                    $.toptip(data.msg, 'success');
+                    setTimeout("javascript:location.href='/wechat/reserve_list'", 3000);
+                }
+            }
+        });
+    }
+</script>
+</body>
+</html>

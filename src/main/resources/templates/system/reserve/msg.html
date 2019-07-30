@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link th:href="@{/ajax/libs/jQuery-WeUI/weui.min.css}" rel="stylesheet">
+    <link th:href="@{/ajax/libs/jQuery-WeUI/jquery-weui.min.css}" rel="stylesheet">
+    <link th:href="@{/css/style2.css}" rel="stylesheet">
+    <link th:href="@{/ajax/libs/jQuery-WeUI/demos.css}" rel="stylesheet">
+
+    <title>操作结果</title>
+</head>
+<body ontouchstart>
+<div class="weui-msg">
+    <div class="weui-msg__icon-area"><i class="weui-icon-success weui-icon_msg"></i></div>
+    <div class="weui-msg__text-area">
+        <h2 class="weui-msg__title">操作成功</h2>
+    </div>
+    <div class="weui-msg__opr-area">
+        <p class="weui-btn-area">
+            <a href="/wechat/reserve_list" class="weui-btn weui-btn_primary">预约记录</a>
+            <a href="/wechat/reserve" class="weui-btn weui-btn_default">再次预约</a>
+        </p>
+    </div>
+</div>
+</div>
+
+<script th:src="@{/js/jquery.min.js}"></script>
+<script th:src="@{/ajax/libs/jQuery-WeUI/jquery-weui.min.js}"></script>
+</body>
+</html>

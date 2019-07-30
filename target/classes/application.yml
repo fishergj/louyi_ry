@@ -7,11 +7,15 @@ ruoyi:
   # 版权年份
   copyrightYear: 2019
   # 实例演示开关
-  demoEnabled: true
+  demoEnabled: false
   # 文件路径 示例（ Windows配置D:/ruoyi/uploadPath，Linux配置 /home/ruoyi/uploadPath）
-  profile: /Users/jungao/Documents/logs/ruoyi/profile
+  profile: D:/ruoyi/uploadPath
   # 获取ip地址开关
   addressEnabled: true
+  # 周期插入数据
+  maxDay: 7
+  #每个时间段最多可预约人数
+  periodMaxPerson: 100
 
 # 开发环境配置
 server:

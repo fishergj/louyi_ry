@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link th:href="@{/ajax/libs/jQuery-WeUI/weui.min.css}" rel="stylesheet">
+    <link th:href="@{/ajax/libs/jQuery-WeUI/jquery-weui.min.css}" rel="stylesheet">
+    <link th:href="@{/css/style2.css}" rel="stylesheet">
+    <link th:href="@{/ajax/libs/jQuery-WeUI/demos.css}" rel="stylesheet">
+
+    <title>参观预约</title>
+</head>
+<body ontouchstart>
+    <header class='demos-header'>
+        <h1 class="demos-title">参观预约</h1>
+        <!--<h4 class="demos-sub-title">请认真填写您的预约信息</h4>-->
+    </header>
+    <div class="weui-cells weui-cells_form">
+        <form id="reserveFm">
+        <div class="weui-cell">
+            <div class="weui-cell__hd">
+                <label for="name" class="weui-label">预约人姓名</label>
+            </div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="text" id="name" name="name" placeholder="请输入姓名" maxlength="64">
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd">
+                <label for="telephone" class="weui-label">预约手机号</label>
+            </div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="tel" id="telephone" name="telephone" placeholder="请输入手机号" maxlength="11">
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd">
+                <label for="adult" class="weui-label">成人人数</label>
+            </div>
+            <div class="weui-cell__ft">
+                <div class="weui-count">
+                    <a class="weui-count__btn weui-count__decrease"></a>
+                    <input class="weui-count__number" id="adult" name="adult" type="text" value="1" onblur="getTime()"/>
+                    <a class="weui-count__btn weui-count__increase"></a>
+                </div>
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd">
+                <label for="child" class="weui-label">儿童人数</label>
+            </div>
+            <div class="weui-cell__ft">
+                <div class="weui-count">
+                    <a class="weui-count__btn weui-count__decrease"></a>
+                    <input class="weui-count__number" id="child" name="child" type="text" value="1" onblur="getTime()"/>
+                    <a class="weui-count__btn weui-count__increase"></a>
+                </div>
+            </div>
+        </div>
+        <div class="weui-cells__tips">预约人数最多100人次！</div>
+        <div class="weui-cell weui-cell_select weui-cell_select-after">
+            <div class="weui-cell__hd">
+                <label for="subscribe_time_id" class="weui-label">预约日期</label>
+            </div>
+            <div class="weui-cell__bd">
+                <!--<input class="weui-input" type="date" id="subscribe_time_id" name="subscribe_time_id" value="">-->
+                <select class="weui-select" id="subscribe_time_id" name="subscribe_time_id">
+                </select>
+            </div>
+        </div>
+        <div class="weui-cells__tips">请先设置预约人数再选时间！</div>
+        <div class="weui-cell weui-cell_select weui-cell_select-after">
+            <div class="weui-cell__hd">
+                <label for="venue" class="weui-label">预约场馆</label>
+            </div>
+            <div class="weui-cell__bd">
+                <!--<input class="weui-input" type="date" id="venue" name="venue" value="">-->
+                <select class="weui-select" id="venue" name="venue">
+                </select>
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                <textarea class="weui-textarea" id="remark" name="remark" placeholder="备注：200字以内" rows="3" maxlength="200"></textarea>
+            </div>
+        </div>
+        </form>
+    </div>
+    <div class="weui-cells__tips">提示：若没有可预约时间，即代表预约参观人数已满，请稍后再行预约！感谢您的使用！</div>
+    <div class="weui-btn-area">
+        <a class="weui-btn weui-btn_primary" onclick="addOrder()" id="showTooltips">确认预约</a>
+    </div>
+
+<script th:src="@{/js/jquery.min.js}"></script>
+<script th:src="@{/ajax/libs/jQuery-WeUI/jquery-weui.min.js}"></script>
+<script>
+    var MAX = 100, MIN = 0;
+    $('.weui-count__decrease').click(function (e) {
+        var $input = $(e.currentTarget).parent().find('#adult');
+        var number = parseInt($input.val() || "0") - 1;
+        if (number < MIN) number = MIN;
+        $input.val(number);
+    })
+    $('.weui-count__increase').click(function (e) {
+        var $input = $(e.currentTarget).parent().find('#adult');
+        var number = parseInt($input.val() || "0") + 1;
+        if (number > (MAX)) number = MAX;
+        $input.val(number);
+    })
+    $('.weui-count__decrease').click(function (e) {
+        var $input = $(e.currentTarget).parent().find('#child');
+        var number = parseInt($input.val() || "0") - 1;
+        if (number < MIN) number = MIN;
+        $input.val(number);
+    })
+    $('.weui-count__increase').click(function (e) {
+        var $input = $(e.currentTarget).parent().find('#child');
+        var number = parseInt($input.val() || "0") + 1;
+        if (number > MAX) number = MAX;
+        $input.val(number);
+    })
+
+    /**
+     * 成人、儿童输入框失去焦点联动预约时间查询
+     */
+    function getTime() {
+        var adult = $('#adult').val();
+        var child = $('#child').val();
+        if (adult + child <= 0) {
+            alert('请先输入参观人数');
+            return false;
+        }
+        var subscribe_num = adult + child;
+        $.ajax({
+            type: "GET",
+            url: "/wechat/getReserveTime?subscribe_num=" + subscribe_num,
+            dataType: "json",
+            success: function (data) {
+                var optionstring = '';
+                $.each(data, function(key,value){  //循环遍历后台传过来的json数据
+                    optionstring += "<option value=\"" + value.id + "\" >" + value.time + "</option>";
+                });
+                $("#subscribe_time_id").html("<option value='-1'>请选择合适的参观时间</option>" + optionstring);
+            },
+            error: function (jqXHR) {
+                console.log("Error: " + jqXHR.status);
+            }
+        });
+    }
+
+    $.ajax({
+        type: "GET",
+        url: "/wechat/venues",
+        dataType: "json",
+        success: function (data) {
+            var optionstring = '';
+            $.each(data, function(key, value){  //循环遍历后台传过来的json数据
+                optionstring += "<option value=\"" + value.id + "\" >" + value.name + "</option>";
+            });
+            /*$("#venue").html("<option value='-1'>请选择合适的参观时间</option>" + optionstring);*/
+            $("#venue").html(optionstring);
+        },
+        error: function (jqXHR) {
+            console.log("Error: " + jqXHR.status);
+        }
+    });
+
+    function addOrder() {
+        $.ajax({
+            url:"/wechat/reserve",
+            data:$('#reserveFm').serialize(),
+            type:'post',
+            success:function(data){
+                if (data.code === -1) {
+                    $.toptip(data.msg, 'error');
+                } else if (data.code === 0) {
+                    $('#reserveFm').reset();
+                    $.toptip(data.msg, 'success');
+                    setTimeout("javascript:location.href='/wechat/msg'", 3000);
+                }
+            }
+        });
+    }
+</script>
+</body>
+</html>

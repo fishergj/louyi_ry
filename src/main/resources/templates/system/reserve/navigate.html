@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
+    <title>一键导航</title>
+</head>
+<body>
+    <div id="navigate">
+
+    </div>
+
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/vue.min.js}"></script>
+    <script th:src="@{/js/axios.min.js}"></script>
+    <script th:src="@{/js/nav.js}"></script>
+    <script charset="utf-8" src="http://map.qq.com/api/js?v=2.exp&libraries=convertor"></script>
+    <script th:src="@{/js/jweixin-1.2.0.js}"></script>
+    <!--<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>-->
+
+    <script>
+        window.onload=function() {
+            var vm = new Vue({
+                el: '#intro',
+                data: {
+                    // url: 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png',
+                    // w: '200px',
+                    // h: '100px',
+                    introType: 2,
+                    content: ''
+                },
+                methods: {
+
+                },
+                mounted(){ //常用！！！
+                    //alert('模板编译之后，已经挂载，此时才会渲染页面，才能看到页面上数据的展示');
+                    axios.get('/wechat/museum/intro/' + this.introType)
+                    /*axios.get('/wechat/meseum/intro', {
+                        params: {
+                            introType: '1' //1-场馆概述； 2-场馆导览； 3-展品介绍； 4-精彩瞬间
+                        }
+                    })*/
+                        .then(resp => {
+                        //console.log(resp.data.content);
+                        this.content = resp.data.content;
+                    }).catch(err => {
+                        console.log('请求失败：' + err.status + ',' + err.statusText);
+                    });
+                }
+            });
+        }
+    </script>
+</body>
+</html>
