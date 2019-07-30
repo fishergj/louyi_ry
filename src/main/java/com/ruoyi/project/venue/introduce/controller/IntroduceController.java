@@ -67,7 +67,7 @@ public class IntroduceController extends BaseController {
 	 * 新增保存场馆介绍
 	 */
 	@RequiresPermissions("venue:introduce:add")
-	@Log(title = "通知场馆介绍", businessType = BusinessType.INSERT)
+	@Log(title = "新增场馆介绍", businessType = BusinessType.INSERT)
 	@PostMapping("/add")
 	@ResponseBody
 	public AjaxResult addSave(VenueIntro venueIntro) {
@@ -88,7 +88,7 @@ public class IntroduceController extends BaseController {
 	 * 修改保存场馆介绍
 	 */
 	@RequiresPermissions("venue:introduce:edit")
-	@Log(title = "通知场馆介绍", businessType = BusinessType.UPDATE)
+	@Log(title = "修改场馆介绍", businessType = BusinessType.UPDATE)
 	@PostMapping("/edit")
 	@ResponseBody
 	public AjaxResult editSave(VenueIntro venueIntro) {
@@ -99,7 +99,7 @@ public class IntroduceController extends BaseController {
 	 * 删除场馆介绍
 	 */
 	@RequiresPermissions("venue:introduce:remove")
-	@Log(title = "通知场馆介绍", businessType = BusinessType.DELETE)
+	@Log(title = "删除场馆介绍", businessType = BusinessType.DELETE)
 	@PostMapping("/remove")
 	@ResponseBody
 	public AjaxResult remove(String ids) {

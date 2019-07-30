@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<meta charset="utf-8">
+<th:block th:include="include :: header('新增禁止日期')" />
+<th:block th:include="include :: summernote-css" />
+<body class="white-bg">
+	<div class="wrapper wrapper-content animated fadeInRight ibox-content">
+		<form class="form-horizontal m" id="form-stopdate-add">
+			<div class="form-group">
+				<label class="col-sm-3 control-label">禁止预约日期：</label>
+				<div class="col-sm-8">
+					<input type="text" class="time-input" id="stopdate" placeholder="禁止日期" name="stopdate" />
+				</div>
+			</div>
+		</form>
+	</div>
+	<div th:include="include::footer"></div>
+	<th:block th:include="include :: footer" />
+	<script type="text/javascript">
+        var prefix = ctx + "venue/stopdate";
+		function submitHandler() {
+	        if ($.validate.form()) {
+				$.operate.save(prefix + "/add", $('#form-stopdate-add').serialize());
+	        }
+	    }
+	</script>
+</body>
+</html>
