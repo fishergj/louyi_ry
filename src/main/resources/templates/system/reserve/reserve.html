@@ -175,7 +175,6 @@
                 if (data.code === -1) {
                     $.toptip(data.msg, 'error');
                 } else if (data.code === 0) {
-                    $('#reserveFm').reset();
                     $.toptip(data.msg, 'success');
                     setTimeout("javascript:location.href='/wechat/msg'", 3000);
                 }
