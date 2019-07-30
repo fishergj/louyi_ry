@@ -3,6 +3,45 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.project.venue.order.mapper.OrderMapper">
+
+	<insert id="insert" parameterType="Order">
+		insert into t_order
+		(
+			name, telephone, w_no, adult, child, subscribe_num, subscribe_type, subscribe_time_id, venue, remark, input_time, status, create_time
+		)
+		values
+		(
+			#{name},
+			#{telephone},
+			#{w_no},
+			#{adult},
+			#{child},
+			#{subscribe_num},
+			#{subscribe_type},
+			#{subscribe_time_id},
+			#{venue},
+			#{remark},
+			#{input_time},
+			#{status},
+			#{create_time}
+		)
+
+	</insert>
+
+	<insert id="insertComment" parameterType="Comment">
+		insert into t_message
+		(
+			w_no, suggest, input_time, status, create_time
+		)
+		values
+		(
+			#{w_no},
+			#{suggest},
+			#{input_time},
+			#{status},
+			#{create_time}
+		)
+	</insert>
    
      <select id="selectOrderList" parameterType="Order" resultType="Order">
        select 
@@ -109,10 +148,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             auditor = #{auditor},
             audit_time = sysdate(),
             update_time = sysdate()
-            
         </set>
          where Id = #{id}
     </update>
+
+	<update id="cancelReserveByWno">
+		update t_order
+		set
+		status='2'
+		where w_no=#{w_no}
+	</update>
     
      <update id="updateOrderTime" parameterType="OrderResultBo">
         update t_order 
@@ -358,12 +403,37 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     	select count(1) from t_order where status = 1 
     </select>
     
-    <select id="selectSubscribePerson" parameterType="Integer"  resultType="int">
+    <select id="selectSubscribePerson" parameterType="Integer" resultType="int">
 	  	SELECT
 			ifnull(sum(subscribe_num),0) totalPerson
 		FROM
 			t_order
 		WHERE subscribe_time_id = #{id}
    </select>
-    
+
+	<select id="getNormalOrderByWno" parameterType="String" resultType="Order">
+		select * from t_order where w_no=#{w_no} and status in (1, 4, 5) and input_time>sysdate() order by input_time desc
+	</select>
+
+	<select id="getValidCountByTimeId" resultType="int">
+		select count(*) from t_order where subscribe_time_id=#{subscribe_time_id}
+	</select>
+
+	<select id="getNormalOrderVoByWno" parameterType="String" resultType="OrderVo">
+		select
+		 t1.id, t1.name, t1.telephone, t1.w_no, t1.adult, t1.child, t1.subscribe_num, t1.subscribe_type,
+		 t1.subscribe_time_id, t1.venue, t2.name as venue_text, t1.remark, t1.input_time, t1.create_time,
+		 t1.status,
+		 case t1.status
+		 	when '1' then '待审核'
+		 	when '2' then '用户撤销'
+		 	when '3' then '驳回'
+		 	when '4' then '协商调整'
+		 	when '5' then '审核通过'
+		 	else '已过期' end as status_text
+		 from
+		  t_order t1, t_venue t2
+		   where w_no=#{w_no} and t1.venue=t2.id
+		order by t1.input_time desc
+	</select>
 </mapper>

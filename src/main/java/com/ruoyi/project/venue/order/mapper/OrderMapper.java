@@ -2,15 +2,21 @@ package com.ruoyi.project.venue.order.mapper;
 
 import java.util.HashMap;
 import java.util.List;
+
+import com.ruoyi.project.system.wechat.domain.Comment;
 import com.ruoyi.project.venue.order.bo.OrderResultBo;
 import com.ruoyi.project.venue.order.domain.Order;
 import com.ruoyi.project.venue.order.domain.OrderStastics;
+import com.ruoyi.project.venue.order.domain.OrderVo;
+import org.apache.ibatis.annotations.Param;
 
 
 public interface OrderMapper {
+	public int insert(Order order);
+
 	/**
 	 * 查询预约记录列表
-	 * @param list
+	 * @param bo
 	 * @return
 	 */
 	public List<Order>  selectOrderList(Order bo);
@@ -77,8 +83,23 @@ public interface OrderMapper {
 	
 	/**
 	 * 某一个时间段预约总人数
-	 * @param selectSubscribePerson
+	 * @param id
 	 * @return
 	 */
 	public int selectSubscribePerson(int id);
+
+	/**
+	 * 根据公众号openid查询当前有效预约
+	 * @param w_no
+	 * @return
+	 */
+	List<Order> getNormalOrderByWno(@Param("w_no") String w_no);
+
+	int getValidCountByTimeId(@Param("subscribe_time_id") int subscribe_time_id);
+
+	int insertComment(Comment comment);
+
+    List<OrderVo> getNormalOrderVoByWno(String w_no);
+
+	int cancelReserveByWno(@Param("w_no") String w_no);
 }

@@ -134,4 +134,9 @@ public class SubscribeDetailServiceImpl implements ISubscribeDetailService{
 		}
 		return dtList;	
 	}
+
+	@Override
+	public Date selectFromDtById(int subscribe_time_id) {
+		return subscribeDetailMapper.selectFromDtById(subscribe_time_id);
+	}
 }

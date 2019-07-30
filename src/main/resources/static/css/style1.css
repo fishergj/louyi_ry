@@ -693,7 +693,7 @@ img {
 .col-xs-6 {
 	width: 100%;
 }
-#home {
+#HOME {
 	background: url(../images/bg-mia.jpg) no-repeat center center fixed;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
@@ -717,7 +717,23 @@ img {
 	background-size: cover;
 	font-family: 'Raleway', sans-serif;
 }
-#reservesec {
+#RESERVESEC {
+	background: url(../images/bg-contact.jpg) no-repeat center center fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	font-family: 'Raleway', sans-serif;
+}
+#RESERVEDSEC {
+	background: url(../images/bg-contact.jpg) no-repeat center center fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	font-family: 'Raleway', sans-serif;
+}
+#RECOMMENDSEC {
 	background: url(../images/bg-contact.jpg) no-repeat center center fixed;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;

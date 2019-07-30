@@ -11,6 +11,7 @@ public class WechatEventKit {
 	public static String handlerEventMsg(Map<String, String> msgMap) throws IOException {
 		String event = msgMap.get("Event");
 		System.out.println(event);
+		System.out.println();
 		if("CLICK".equals(event)) {
 			//return handlerClickEvent(msgMap);
 		} else if("SCAN".equals(event)) {
