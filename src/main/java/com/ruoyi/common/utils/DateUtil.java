@@ -442,6 +442,20 @@ public class DateUtil {
 		calendar.add(period.getCalendarField(), 0 - period.getAmount());
 		return calendar.getTimeInMillis();
 	}
+	
+	/**
+	 * 日期直接相差的天数
+	 * @param fromDt
+	 * @param toDt
+	 * @return
+	 */
+	public static int getBetweenDays(Date fromDt, Date toDt) {
+		long from = fromDt.getTime();
+		long to = toDt.getTime();
+		int days = (int) ((to - from) / (1000*60*60*24));
+		return days;
+	}
+
 
 	/**
 	 * 获取指定周期之前的时刻

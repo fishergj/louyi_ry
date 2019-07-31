@@ -118,14 +118,15 @@ public class SubscribeDetailServiceImpl implements ISubscribeDetailService{
 	public List<SubscribeTime> getInvalidDateList(int guestNum, Date fromDt,boolean isTypeIngore) {
 		List<SubscribeTime> dtList = new ArrayList<SubscribeTime>();
 		HashMap<String,Object> map = new HashMap<String,Object>();
+		int teamNUm = ruoYiConfig.getReserveTypeNum();
 		map.put("fromDt", fromDt);
 		map.put("periodMaxPerson", ruoYiConfig.getPeriodMaxPerson());
 		List<SubscribeDetail> list = subscribeDetailMapper.getInvalidDateList(map);
 		for(SubscribeDetail item :list){
 			if(!isTypeIngore){
-				if(guestNum  >= 10 && "1".equals(item.getTypeTeam())){
+				if(guestNum  >= teamNUm && "1".equals(item.getTypeTeam())){
 					continue;
-				}else if(guestNum  < 10 && "1".equals(item.getTypePerson())){
+				}else if(guestNum  < teamNUm && "1".equals(item.getTypePerson())){
 					continue;
 				}
 			}

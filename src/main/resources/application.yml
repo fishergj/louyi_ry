@@ -20,6 +20,8 @@ ruoyi:
   reserveTypeNum: 10
   # 最早预约天数
   preReserveDay: 3
+  #取消预约提前天数
+  cancelPreDay: 2
 
 # 开发环境配置
 server:

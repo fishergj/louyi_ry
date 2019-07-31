@@ -8,6 +8,8 @@ import java.util.List;
 
 public interface IOrderService {
 
+	String checkCancel(int id);
+	  
     public String insert(Order order);
 
     List<Order> getNormalOrderByWno(String w_no);

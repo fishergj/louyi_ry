@@ -1,6 +1,28 @@
 package com.ruoyi.project.system.wechat.controller;
 
+import java.io.IOException;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.alibaba.fastjson.JSONObject;
+import com.github.pagehelper.util.StringUtil;
 import com.ruoyi.common.utils.DateUtil;
 import com.ruoyi.common.utils.spring.SpringUtils;
 import com.ruoyi.framework.config.RuoYiConfig;
@@ -16,22 +38,6 @@ import com.ruoyi.project.venue.order.domain.OrderVo;
 import com.ruoyi.project.venue.order.domain.SubscribeTime;
 import com.ruoyi.project.venue.order.service.IOrderService;
 import com.ruoyi.project.venue.order.service.ISubscribeDetailService;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.util.EntityUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import java.io.IOException;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
 
 
 @Controller
@@ -138,6 +144,10 @@ public class WechatReserveController extends BaseController {
     @PostMapping("/reserve_cancel")
     @ResponseBody
     public AjaxResult reserve_cancel(int id) {
+    	String cancelMsg = orderService.checkCancel(id);
+    	if(!StringUtil.isEmpty(cancelMsg)){
+    		 return new AjaxResult(AjaxResult.Type.WARN,cancelMsg);
+    	}
         int ret = orderService.cancelReserveById(id);
         if(ret == 1){
         	 return new AjaxResult(AjaxResult.Type.SUCCESS, "预约取消成功！");

@@ -38,6 +38,7 @@ public class RuoYiConfig
 
     private int preReserveDay;
 
+    private int cancelPreDay;
     public String getName()
     {
         return name;
@@ -153,6 +154,14 @@ public class RuoYiConfig
     public void setPreReserveDay(int preReserveDay) {
         this.preReserveDay = preReserveDay;
     }
+
+	public int getCancelPreDay() {
+		return cancelPreDay;
+	}
+
+	public void setCancelPreDay(int cancelPreDay) {
+		this.cancelPreDay = cancelPreDay;
+	}
 
 	
 }
