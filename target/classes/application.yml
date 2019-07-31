@@ -9,13 +9,17 @@ ruoyi:
   # 实例演示开关
   demoEnabled: false
   # 文件路径 示例（ Windows配置D:/ruoyi/uploadPath，Linux配置 /home/ruoyi/uploadPath）
-  profile: D:/ruoyi/uploadPath
+  profile: /Users/jungao/Documents/project/file_repo/profile
   # 获取ip地址开关
   addressEnabled: true
   # 周期插入数据
   maxDay: 7
   #每个时间段最多可预约人数
   periodMaxPerson: 100
+  # 预约团体类型人数分界
+  reserveTypeNum: 10
+  # 最早预约天数
+  preReserveDay: 3
 
 # 开发环境配置
 server:

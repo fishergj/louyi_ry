@@ -34,6 +34,10 @@ public class RuoYiConfig
     
     private int periodMaxPerson;
 
+    private int reserveTypeNum;
+
+    private int preReserveDay;
+
     public String getName()
     {
         return name;
@@ -133,6 +137,22 @@ public class RuoYiConfig
 	public void setPeriodMaxPerson(int periodMaxPerson) {
 		this.periodMaxPerson = periodMaxPerson;
 	}
+
+    public int getReserveTypeNum() {
+        return reserveTypeNum;
+    }
+
+    public void setReserveTypeNum(int reserveTypeNum) {
+        this.reserveTypeNum = reserveTypeNum;
+    }
+
+    public int getPreReserveDay() {
+        return preReserveDay;
+    }
+
+    public void setPreReserveDay(int preReserveDay) {
+        this.preReserveDay = preReserveDay;
+    }
 
 	
 }

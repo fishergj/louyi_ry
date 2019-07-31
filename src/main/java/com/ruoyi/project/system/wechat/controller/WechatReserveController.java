@@ -3,6 +3,7 @@ package com.ruoyi.project.system.wechat.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.ruoyi.common.utils.DateUtil;
 import com.ruoyi.common.utils.spring.SpringUtils;
+import com.ruoyi.framework.config.RuoYiConfig;
 import com.ruoyi.framework.config.WechatConfig;
 import com.ruoyi.framework.web.controller.BaseController;
 import com.ruoyi.framework.web.domain.AjaxResult;
@@ -47,13 +48,13 @@ public class WechatReserveController extends BaseController {
     @Autowired
     private IIntroduceService introduceService;
 
+    @Autowired
+    private RuoYiConfig ruoYiConfig;
+
     @GetMapping("/reserve")
-    public String reserve(HttpServletRequest request, HttpSession session) {
-        // 获取OpenID
-//        String code = request.getParameter("code");
-//        String openId = getOpenid(code);
-//        session.setAttribute("RESERVE_OPENID", openId);
-        session.setAttribute("RESERVE_OPENID", "ofRfutyLry4QAZ7Xk0FtKpicBqfo");
+    public String reserve(HttpServletRequest request, HttpSession session) throws IOException {
+        if (checkSessionWno(request, session) == false)
+            return prefix + "/forbidMsg";
         return prefix + "/reserve";
     }
 
@@ -72,13 +73,13 @@ public class WechatReserveController extends BaseController {
         }
         // 查看时段当前已有参观人数
         int validCount = orderService.getValidCountByTimeId(order.getSubscribe_time_id());
-        if (subscribeNum + validCount > 100) {
+        if (subscribeNum + validCount > ruoYiConfig.getPeriodMaxPerson()) {
             ajaxResult = new AjaxResult(AjaxResult.Type.NONE, "当前预约人数超过展馆接待量，请选择其他时段进行预约！", order);
             return ajaxResult;
         }
 
         order.setSubscribe_num(subscribeNum);
-        if (subscribeNum < 10) {
+        if (subscribeNum < ruoYiConfig.getReserveTypeNum()) {
             order.setSubscribe_type("1");
         } else {
             order.setSubscribe_type("2");
@@ -99,12 +100,9 @@ public class WechatReserveController extends BaseController {
     }
 
     @GetMapping("/reserve_list")
-    public String reserve_list(HttpServletRequest request, HttpSession session, Model model) {
-        // 获取OpenID
-//        String code = request.getParameter("code");
-//        String openId = getOpenid(code);
-//        session.setAttribute("RESERVE_OPENID", openId);
-        session.setAttribute("RESERVE_OPENID", "ofRfutyLry4QAZ7Xk0FtKpicBqfo");
+    public String reserve_list(HttpServletRequest request, HttpSession session, Model model) throws IOException {
+        if (checkSessionWno(request, session) == false)
+            return prefix + "/forbidMsg";
         String w_no = "";
         List<OrderVo> orderVos = null;
         if (session.getAttribute("RESERVE_OPENID") != null) {
@@ -154,65 +152,12 @@ public class WechatReserveController extends BaseController {
         return prefix + "/msg";
     }
 
-    /**
-     * 参观预约
-     * @return
-     */
-    @GetMapping("/doReserve/{sec}")
-    public String reserveInit(HttpServletRequest request, HttpSession session, @PathVariable("sec") String sec) throws IOException {
-//        String code = request.getParameter("code");
-//        String openId = getOpenid(code);
-//        session.setAttribute("RESERVE_OPENID", openId);
-        session.setAttribute("RESERVE_OPENID", "ofRfutyLry4QAZ7Xk0FtKpicBqfo");
-        session.setAttribute("RESERVE_SEC", sec);
-        return prefix + "/doReserve";
-    }
-
-    @PostMapping("/doReserve")
-    @ResponseBody
-    public AjaxResult doReserve(Order order, HttpSession session) {
-        order.setW_no(session.getAttribute("RESERVE_OPENID").toString());
-        int subscribeNum = order.getAdult() + order.getChild();
-        order.setSubscribe_num(subscribeNum);
-        if (subscribeNum < 10) {
-            order.setSubscribe_type("1");
-        } else {
-            order.setSubscribe_type("2");
-        }
-        order.setStatus("1"); // 待审核
-
-        Date subscribeDate = subscribeDetailService.selectFromDtById(order.getSubscribe_time_id());
-        order.setInput_time(subscribeDate);
-        order.setCreate_time(new Date());
-        String message = orderService.insert(order);
-        return AjaxResult.success(message);
-    }
-
-    @GetMapping("/reserveQuery")
-    @ResponseBody
-    public AjaxResult doQuery(HttpSession session) {
-        AjaxResult ajaxResult = null;
-        String w_no = "";
-        if (session.getAttribute("RESERVE_OPENID") != null) {
-            w_no = session.getAttribute("RESERVE_OPENID").toString();
-            List<Order> order = orderService.getNormalOrderByWno(w_no);
-            if (order != null) {
-                ajaxResult = new AjaxResult(AjaxResult.Type.NONE, "当前存在有效预约记录", order);
-            } else {
-                ajaxResult = new AjaxResult(AjaxResult.Type.SUCCESS, "当前无有效预约记录");
-            }
-        } else {
-            ajaxResult = new AjaxResult(AjaxResult.Type.ERROR, "请从公众号菜单进行访问");
-        }
-        return ajaxResult;
-    }
-
     @GetMapping("/getReserveTime")
     @ResponseBody
     public List<SubscribeTime> getSubscribeTimeList(Integer subscribe_num) {
         Calendar c = Calendar.getInstance();
         c.setTime(new Date());
-        c.add(Calendar.DATE, 3);
+        c.add(Calendar.DATE, ruoYiConfig.getPreReserveDay());
         List<SubscribeTime> subscribeTimes = subscribeDetailService.getInvalidDateList(subscribe_num, c.getTime(),true);
         return subscribeTimes;
     }
@@ -227,11 +172,9 @@ public class WechatReserveController extends BaseController {
     }
 
     @GetMapping("/comment")
-    public String comment(HttpServletRequest request, HttpSession session) {
-//        String code = request.getParameter("code");
-//        String openId = getOpenid(code);
-//        session.setAttribute("RESERVE_OPENID", openId);
-        session.setAttribute("RESERVE_OPENID", "ofRfutyLry4QAZ7Xk0FtKpicBqfo");
+    public String comment(HttpServletRequest request, HttpSession session) throws IOException {
+        if (checkSessionWno(request, session) == false)
+            return prefix + "/forbidMsg";
         return prefix + "/comment";
     }
 
@@ -252,6 +195,24 @@ public class WechatReserveController extends BaseController {
             ajaxResult = new AjaxResult(AjaxResult.Type.WARN, "请从公众号菜单进行访问！");
         }
         return ajaxResult;
+    }
+
+    /**
+     * 判断session中是否包含OpenId, 不包含则获取
+     * @param request
+     * @param session
+     * @throws IOException
+     */
+    private boolean checkSessionWno(HttpServletRequest request, HttpSession session) throws IOException {
+        if (session.getAttribute("RESERVE_OPENID") == null ) {
+            String code = request.getParameter("code");
+            if (code == null) {
+                return false;
+            }
+            String openId = getOpenid(code);
+            session.setAttribute("RESERVE_OPENID", openId);
+        }
+        return true;
     }
 
     /**

@@ -1,19 +1,25 @@
 package com.ruoyi.project.system.wechat.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.ruoyi.common.utils.spring.SpringUtils;
 import com.ruoyi.framework.config.WechatConfig;
 import com.ruoyi.framework.web.controller.BaseController;
 import com.ruoyi.project.system.wechat.util.BasicKit;
 import com.ruoyi.project.system.wechat.util.SecurityKit;
+import com.ruoyi.project.system.wechat.util.Sign;
 import com.ruoyi.project.system.wechat.util.WechatMessageKit;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Map;
 
 /**
  * 消息处理中心
@@ -23,6 +29,8 @@ import java.util.Arrays;
  */
 @Controller
 public class WechatController extends BaseController {
+	@Autowired
+	private WechatConfig wechatConfig;
 
 	@GetMapping("/wechat")
 	public void handlerGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
@@ -55,5 +63,21 @@ public class WechatController extends BaseController {
 		if (!BasicKit.isEmpty(rel)) {
 			resp.getWriter().write(rel);
 		}
+	}
+
+	/**
+	 * JSSDK接入
+	 * @param request
+	 * @param url
+	 * @return
+	 * @throws Exception
+	 */
+	@PostMapping("/wechat/getMsg")
+	@ResponseBody
+	public Map<String, String> test(HttpServletRequest request, String url)
+			throws Exception {
+		String ticket = wechatConfig.getTicketToken().getTicket();
+		Map<String, String> map = Sign.sign(ticket, url);
+		return map;
 	}
 }

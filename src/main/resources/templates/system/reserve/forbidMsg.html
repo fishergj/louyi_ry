@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link th:href="@{/ajax/libs/jQuery-WeUI/weui.min.css}" rel="stylesheet">
+    <link th:href="@{/ajax/libs/jQuery-WeUI/jquery-weui.min.css}" rel="stylesheet">
+    <link th:href="@{/css/style2.css}" rel="stylesheet">
+    <link th:href="@{/ajax/libs/jQuery-WeUI/demos.css}" rel="stylesheet">
+
+    <title>访问提醒</title>
+</head>
+<body ontouchstart>
+<div class="weui-msg">
+    <div class="weui-msg__icon-area"><i class="weui-icon-warn weui-icon_msg"></i></div>
+    <p class="weui-msg__desc">已禁止本次访问：请关注微信公众号后点击菜单访问!</p>
+</div>
+</div>
+
+<script th:src="@{/js/jquery.min.js}"></script>
+<script th:src="@{/ajax/libs/jQuery-WeUI/jquery-weui.min.js}"></script>
+</body>
+</html>

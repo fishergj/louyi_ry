@@ -51,6 +51,23 @@
 <script th:src="@{/js/jquery.min.js}"></script>
 <script th:src="@{/ajax/libs/jQuery-WeUI/jquery-weui.min.js}"></script>
 <script>
+    $(document).ready(function() {
+        // 限制微信客户端查看
+        var ua = navigator.userAgent.toLowerCase();
+        var isWeixin = ua.indexOf('micromessenger') != -1;
+        var isAndroid = ua.indexOf('android') != -1;
+        var isIos = (ua.indexOf('iphone') != -1) || (ua.indexOf('ipad') != -1);
+
+        if (!isWeixin) {
+            //这里警告框会阻塞当前页面继续加载
+            $.alert("已禁止本次访问：请关注微信公众号后点击菜单访问!", "警告！");
+            // 以下代码是用javascript强行关闭当前页面
+            var opened = window.open('about:blank', '_self');
+            opened.opener = null;
+            opened.close();
+        }
+    });
+
     function cancel(id) {
     	 $.confirm("您确定取消此预约信息吗?", "确认取消?", function() {
     		 $.ajax({

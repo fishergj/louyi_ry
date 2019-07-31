@@ -40,9 +40,9 @@
             </div>
             <div class="weui-cell__ft">
                 <div class="weui-count">
-                    <a class="weui-count__btn weui-count__decrease"></a>
-                    <input class="weui-count__number" id="adult" name="adult" type="text" value="1" onblur="getTime()"/>
-                    <a class="weui-count__btn weui-count__increase"></a>
+                    <a class="weui-count__btn weui-count__decrease" id="adult_minus"></a>
+                    <input class="weui-count__number" style="width: 100px;" id="adult" name="adult" type="text" value="1" onblur="getTime()"/>
+                    <a class="weui-count__btn weui-count__increase" id="adult_add"></a>
                 </div>
             </div>
         </div>
@@ -52,9 +52,9 @@
             </div>
             <div class="weui-cell__ft">
                 <div class="weui-count">
-                    <a class="weui-count__btn weui-count__decrease"></a>
-                    <input class="weui-count__number" id="child" name="child" type="text" value="1" onblur="getTime()"/>
-                    <a class="weui-count__btn weui-count__increase"></a>
+                    <a class="weui-count__btn weui-count__decrease" id="child_minus"></a>
+                    <input class="weui-count__number" style="width: 100px;" id="child" name="child" type="text" value="0" onblur="getTime()"/>
+                    <a class="weui-count__btn weui-count__increase" id="child_add"></a>
                 </div>
             </div>
         </div>
@@ -65,7 +65,7 @@
             </div>
             <div class="weui-cell__bd">
                 <!--<input class="weui-input" type="date" id="subscribe_time_id" name="subscribe_time_id" value="">-->
-                <select class="weui-select" id="subscribe_time_id" name="subscribe_time_id">
+                <select class="weui-select" id="subscribe_time_id" name="subscribe_time_id" th:onclick="getTime()">
                 </select>
             </div>
         </div>
@@ -95,31 +95,56 @@
 <script th:src="@{/js/jquery.min.js}"></script>
 <script th:src="@{/ajax/libs/jQuery-WeUI/jquery-weui.min.js}"></script>
 <script>
-    var MAX = 100, MIN = 0;
-    $('.weui-count__decrease').click(function (e) {
+    var MAX = 50, MIN_ADULT = 1, MIN_CHILD = 0;
+
+    $(document).ready(function() {
+        // 限制微信客户端查看
+        var ua = navigator.userAgent.toLowerCase();
+        var isWeixin = ua.indexOf('micromessenger') != -1;
+        var isAndroid = ua.indexOf('android') != -1;
+        var isIos = (ua.indexOf('iphone') != -1) || (ua.indexOf('ipad') != -1);
+
+        if (!isWeixin) {
+            //这里警告框会阻塞当前页面继续加载
+            $.alert("已禁止本次访问：请关注微信公众号后点击菜单访问!", "警告！");
+            // 以下代码是用javascript强行关闭当前页面
+            var opened = window.open('about:blank', '_self');
+            opened.opener = null;
+            opened.close();
+        }
+    });
+
+    // 成人-
+    $('#adult_minus').click(function (e) {
         var $input = $(e.currentTarget).parent().find('#adult');
         var number = parseInt($input.val() || "0") - 1;
-        if (number < MIN) number = MIN;
+        if (number < MIN_ADULT) number = MIN_ADULT;
         $input.val(number);
-    })
-    $('.weui-count__increase').click(function (e) {
+    });
+
+    // 成人+
+    $('#adult_add').click(function (e) {
         var $input = $(e.currentTarget).parent().find('#adult');
         var number = parseInt($input.val() || "0") + 1;
-        if (number > (MAX)) number = MAX;
+        if (number > MAX) number = MAX;
         $input.val(number);
-    })
-    $('.weui-count__decrease').click(function (e) {
+    });
+
+    // 儿童-
+    $('#child_minus').click(function (e) {
         var $input = $(e.currentTarget).parent().find('#child');
         var number = parseInt($input.val() || "0") - 1;
-        if (number < MIN) number = MIN;
+        if (number < MIN_CHILD) number = MIN_CHILD;
         $input.val(number);
-    })
-    $('.weui-count__increase').click(function (e) {
+    });
+
+    // 儿童+
+    $('#child_add').click(function (e) {
         var $input = $(e.currentTarget).parent().find('#child');
         var number = parseInt($input.val() || "0") + 1;
         if (number > MAX) number = MAX;
         $input.val(number);
-    })
+    });
 
     /**
      * 成人、儿童输入框失去焦点联动预约时间查询
@@ -128,7 +153,8 @@
         var adult = $('#adult').val();
         var child = $('#child').val();
         if (adult + child <= 0) {
-            alert('请先输入参观人数');
+            $.alert("参观人数必须大于零!", "警告！");
+            $("#subscribe_time_id").html("");
             return false;
         }
         var subscribe_num = adult + child;
@@ -137,6 +163,7 @@
             url: "/wechat/getReserveTime?subscribe_num=" + subscribe_num,
             dataType: "json",
             success: function (data) {
+                $("#subscribe_time_id").html("");
                 var optionstring = '';
                 $.each(data, function(key,value){  //循环遍历后台传过来的json数据
                     optionstring += "<option value=\"" + value.id + "\" >" + value.time + "</option>";
@@ -158,11 +185,7 @@
             $.each(data, function(key, value){  //循环遍历后台传过来的json数据
                 optionstring += "<option value=\"" + value.id + "\" >" + value.name + "</option>";
             });
-            /*$("#venue").html("<option value='-1'>请选择合适的参观时间</option>" + optionstring);*/
             $("#venue").html(optionstring);
-        },
-        error: function (jqXHR) {
-            console.log("Error: " + jqXHR.status);
         }
     });
 
